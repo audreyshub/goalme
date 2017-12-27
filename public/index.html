@@ -1,1 +1,38 @@
-<p>Hello World</p>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Goals Project</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+    <form class="create-goal">
+        <div>
+            <label for "name">Enter goal </label>
+            <input type="text" name="goal" placeholder="Exercise daily" required/>
+        </div>
+        <div>
+            <label for "start-date">Start date </label>
+            <input type="date" name="start-date" placeholder="Start date" required/>
+        </div>
+        <div>
+            <label for "end-date">End date </label>
+            <input type="date" name="end-date" placeholder="End date">
+        </div>
+        <div>
+            <input type="submit" class="goal-submit" value="Submit" name="submit">
+        </div>
+    </form>
+    <h2>My goals:</h2>
+    <div class="list-goals">
+    </div>
+    <div class="garden">
+    </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/f69011a5ea.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
