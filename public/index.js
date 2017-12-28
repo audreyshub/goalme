@@ -102,18 +102,26 @@ function displaySelectedGoal() {
                 if (goal.actions.length === 0) {
                     $('.garden').append(`<h3>${goal.name}</h3>`)
                     $('.garden').append(`<img class="action-seed" src="images/seed.png">`);
-                } else {
+                } else if (goal.actions.length === 1) {
 
-                    $('.garden').append(`<img class="action-plant" src="images/plant01.png">`);
+                    $('.garden').append(`<img class="action-seed" src="images/plant01.png">`);
                     $('.garden').append(`Actions taken for <h3>${goal.name}:</h3>`);
                     //$('.garden').append(`<div class="actions></div>`);
                     goal.actions.forEach(action => {
                         $('.garden').append(`<p>${action}</p>`);
                     })
+                } else if (goal.actions.length === 2) {
+
+                    $('.garden').append(`<img class="action-seed action-plant-2" src="images/flower.png">`);
+                    $('.garden').append(`Actions taken for <h3>${goal.name}:</h3>`);
+                    //$('.garden').append(`<div class="actions></div>`);
+                    goal.actions.forEach(action => {
+                        $('.garden').append(`<p>${action}</p>`);
+                    })
+
+
+
                 }
-
-
-
             },
             error: function(error) {
                 console.log(error);
@@ -138,12 +146,16 @@ function submitAction() {
                 let action = $('.new-action').val();
                 $('.garden').append(`<p>${action}</p>`);
                 $('.new-action').val('');
-                $('.action-seed').addClass('action-seed-grow');
+                $('.action-seed').addClass('action-seed-shake');
+
+
                 setTimeout(() => {
                     $('.action-seed').attr('src', "images/plant01.png");
-                    $('.action-seed').removeClass('action-seed-grow');
+                    $('.action-seed').removeClass('action-seed-shake');
 
                 }, 1000)
+
+
 
             },
             error: function(error) {
@@ -166,7 +178,7 @@ function deleteAction() {
                 console.log(data);
                 $(event.target).parent().remove();
                 swal("Poof", "Goal was deleted!", "success");
-                $('.garden').html(`<h2>Nothing to see here</h2>`);
+                $('.garden').html(`<h2>Nothing to see here :)</h2>`);
                 displayGoals();
                 //$('.list-goals').remove(`<div class="my-goals" value="${data.data.name}"><img class="seed" value="${data.data._id}" src="images/seedling.png"><p value="${data.data._id}">${data.data.name}</p></div>`);
                 //$('.list-goals').remove(data.data._id);

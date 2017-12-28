@@ -1,122 +1,130 @@
-        html {
-            box-sizing: border-box;
-        }
+html {
+    box-sizing: border-box;
+}
 
-        .create-goal {
-            display: flex;
-            flex-direction: column;
-            border: 3px solid black;
-            justify-content: center;
-            align-items: center;
-            min-height: 60vh;
-        }
+.create-goal {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+}
 
-        .create-goal div {
-            margin: 10px;
-        }
+.create-goal div {
+    margin: 10px;
+}
 
-        label {
-            font-weight: bold;
-        }
+label {
+    font-weight: bold;
+}
 
-        .seed {
+.seed {
 
-            max-height: 8vh;
-        }
+    max-height: 8vh;
+}
 
-        h2 {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
+h2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
-        .list-goals,
-        .my-goals {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            font-weight: bold;
-            margin: 5px;
-        }
+.list-goals,
+.my-goals {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-weight: bold;
+    margin: 5px;
+}
 
-        .my-goals:hover {
-            cursor: pointer;
-        }
+.my-goals:hover {
+    cursor: pointer;
+}
 
-        .seed:hover {
-            max-height: 10vh;
-            cursor: pointer;
-            
-        }
+.seed:hover {
+    max-height: 10vh;
+    cursor: pointer;
+}
 
-        @keyframes shake {
-            0% {
-                transform: translate(1px, 1px) rotate(0deg);
-            }
-            10% {
-                transform: translate(-1px, -2px) rotate(-1deg);
-            }
-            20% {
-                transform: translate(-3px, 0px) rotate(1deg);
-            }
-            30% {
-                transform: translate(3px, 2px) rotate(0deg);
-            }
-            40% {
-                transform: translate(1px, -1px) rotate(1deg);
-            }
-            50% {
-                transform: translate(-1px, 2px) rotate(-1deg);
-            }
-            60% {
-                transform: translate(-3px, 1px) rotate(0deg);
-            }
-            70% {
-                transform: translate(3px, 1px) rotate(-1deg);
-            }
-            80% {
-                transform: translate(-1px, -1px) rotate(1deg);
-            }
-            90% {
-                transform: translate(1px, 2px) rotate(0deg);
-            }
-            100% {
-                transform: translate(1px, -2px) rotate(-1deg);
-            }
-        }
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
 
-        .garden {
-            display: flex;
-            flex-direction: column;
-            border: 3px solid black;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh;
-        }
+.garden {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
 
-        .garden div {
-            margin: 10px;
-        }
+.garden div {
+    margin: 10px;
+}
 
-        .action-seed,
-        .action-plant {
-            align-items: flex-end;
-            max-width: 20vh;
-        }
+.action-seed {
+    align-items: flex-end;
+    max-width: 15vh;
+}
 
-        .action-seed-grow {
+.action-plant {
+    align-items: flex-end;
+    max-width: 10vh;
+}
 
-            /* Start the shake animation and make the animation last for 0.5 seconds */
-            animation: shake 0.5s;
-            /* When the animation is finished, start again */
-            animation-iteration-count: infinite;
-        }
+.action-plant-2 {
+    align-items: flex-end;
+    max-width: 20vh;
+}
 
-        .delete {
+.action-seed-shake {
 
-            color: red;
-            margin-left: 2px;
-        }
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+.delete {
+
+    color: red;
+    margin-left: 2px;
+}

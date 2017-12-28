@@ -1,6 +1,7 @@
 //Routes step 1.- Separate the routes into a different file
 const express = require('express');
-
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 const router = express.Router();
 
 
@@ -14,6 +15,30 @@ router.use(function(req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
+});
+
+router.use(function(req, res, next) {
+    if (req.method === 'OPTIONS') { res.writeHead(200);
+        res.end(); return; }
+    //get token from header or body
+    const token = req.headers.authorization || req.body.token;
+    if (!token) {
+        res.status(401).json({
+            message: "Unauthorized"
+        })
+        return
+    }
+    //verify token is valid
+    jwt.verify(token, config.secret, function(error, decode) {
+        if (error) {
+            res.status(500).json({
+                message: "Token is invalid"
+            })
+            return
+        }
+        //the token is valid, jump to route
+        next();
+    })
 });
 
 router.route('/helloworld')
