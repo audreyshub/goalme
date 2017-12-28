@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 //Route files
 //const itemRoutes = require('./routes/item-routes'); //Routes step 3.- Require the routes for each file
 const goalRoutes = require('./routes/goal-routes');
+const authRoutes = require('./routes/auth-routes');
 
 const config = require('./config');
 
@@ -42,6 +43,7 @@ db.once('open', () => {
 
 app.all('/');
 app.use('/goal', goalRoutes);
+app.use('/auth', authRoutes);
 
 //start our server. This means that the server will be listening to all the requests
 app.listen(port, () => {
