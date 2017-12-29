@@ -12,7 +12,7 @@ router.use(function(req, res, next) {
     console.log("route middleware");
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,authorization');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
@@ -52,7 +52,7 @@ router.route('/create')
         newGoal.name = req.body.name;
         newGoal.startDate = req.body.startDate;
         newGoal.endDate = req.body.endDate;
-
+        newGoal.user =  req.body.userId;
         newGoal
             .save()
             .then((savedGoal) => {
@@ -68,9 +68,9 @@ router.route('/create')
             });
     });
 
-router.route('/all')
+router.route('/all/:userId')
     .get((req, res) => {
-        goalModel.find({})
+        goalModel.find({user: req.params.userId})
             .then((goals) => {
                 res.status(200).json({
                     message: 'Here are your goals',
