@@ -85,7 +85,7 @@ router.route('/login')
                 const token = jwt.sign(tokenUser, config.secret);
                 res.status(200).json({
                     message: 'User logged in successfully',
-                    data: token
+                    data: {"token": token, "userId": user._id}
                 })
             })
             .catch(() => {

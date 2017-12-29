@@ -7,6 +7,59 @@
 </head>
 
 <body>
+    <div class="navbar">
+        <button id="loginBtn">Log in</button>
+        <button id="signinBtn">Sign up</button>
+        <button id="logoutBtn">Log out</button>
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Log in</h2>
+                <form class="login">
+                    <div>
+                        <label for "email">Email</label>
+                        <input type="email" name="email" class="email" required/>
+                    </div>
+                    
+                    <div>
+                        <label for "password">Password</label>
+                        <input type="password" name="password" class="password" required/>
+                    </div>
+                    <div>
+                        <input type="submit" class="login-submit" value="Submit" name="submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="signupModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sign up</h2>
+                <form class="signup">
+                	<div>
+                        <label for "name">Name</label>
+                        <input type="text" name="name" class="signup-name" required/>
+                    </div>
+
+                    <div>
+                        <label for "email">Email</label>
+                        <input type="email" name="email" class="signup-email" required/>
+                    </div>
+                    
+                    <div>
+                        <label for "password">Password</label>
+                        <input type="password" name="password" class="signup-password" required/>
+                    </div>
+                    <div>
+                        <input type="submit" class="signup-submit" value="Submit" name="submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <form class="create-goal">
         <div>
             <label for "name">Enter goal </label>
@@ -24,7 +77,7 @@
             <input type="submit" class="goal-submit" value="Submit" name="submit">
         </div>
     </form>
-    <h2>My goals:</h2>
+    <h2>Your goals:</h2>
     <div class="list-goals">
     </div>
     <div class="garden">
