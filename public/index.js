@@ -151,10 +151,10 @@ function displaySelectedGoal() {
         }, 500);
         $('.garden').html(`<div><input type="button" class="delete" value="Delete goal"></div>`);
         $('.garden').append(`<h2>Enter actions:</h2>`);
-        $('.garden').append(`<div><input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/></div>`);
-        console.log(event.target.attributes.value.nodeValue);
-        $('.garden').append(`<div><input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}"></div>`);
-
+        $('.garden').append(`<div>
+                                <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
+                                <input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}">
+                             </div>`);
         $('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit"></div>`);
 
         $.ajax({
@@ -172,9 +172,10 @@ function displaySelectedGoal() {
 
                 $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
                 $('.garden').append(`Actions taken for <h3>${goal.name}:</h3>`);
-                //$('.garden').append(`<div class="actions></div>`);
+                $('.garden').append(`<div class="actions"></div>`);
                 goal.actions.forEach(action => {
-                    $('.garden').append(`<p class="single-action">${action}</p>`);
+                    debugger
+                    $('.actions').append(`<p class="single-action">${action}</p>`);
                 })
                 /*
                 if (goal.actions.length === 0) {
@@ -285,7 +286,7 @@ function deleteAction() {
 };
 
 function logIn() {
-    $('.navbar').on('click', '.login-submit', (event) => {
+    $('body').on('click', '.login-submit', (event) => {
         event.preventDefault();
         console.log('login submit btn clicked');
         $.ajax({
@@ -342,7 +343,7 @@ function logOut() {
 };
 
 function signUp() {
-    $('.navbar').on('click', '.signup-submit', (event) => {
+    $('body').on('click', '.signup-submit', (event) => {
         event.preventDefault();
         $.ajax({
             url: 'http://localhost:3232/auth/register/',
