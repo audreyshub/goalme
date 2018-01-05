@@ -1,3 +1,68 @@
+var images = ['seed.png', 'plant01.png', 'flower.png', 'garden.jpg'];
+
+function checkUserLogin() {
+    if (localStorage.getItem('token')) {
+        console.log('user is logged in');
+        $('.masthead').hide();
+        $('.list-goals').show();
+        $('.garden').show();
+        $('.left-navbar').show();
+        $('#logoutBtn').show();
+        $('#signinBtn').hide();
+        $('#loginBtn').hide();
+        displayGoals();
+    } else {
+        console.log('user is NOT logged in');
+        $('.masthead').show();
+        $('.list-goals').hide();
+        $('.garden').hide();
+        $('.left-navbar').hide();
+        $('#logoutBtn').hide();
+        $('#signinBtn').show();
+        $('#loginBtn').show();
+        $('.create-goal').hide();
+
+    }
+};
+
+function changeActiveNavbar() {
+    $('body').on('click', '.left-navbar button', event => {
+        console.log('navbar btn clicked');
+        $('.left-navbar button').removeClass('navbar-active');
+        $(event.currentTarget).addClass('navbar-active');
+    })
+}
+
+function changeActiveGoals() {
+    $('body').on('click', '.my-goals', event => {
+        console.log('goal btn clicked');
+        $('.my-goals').removeClass('goal-active');
+        $(event.currentTarget).addClass('goal-active');
+    })
+}
+
+function mygoalsBtnClick() {
+    $('#mygoalsBtn').click(event => {
+        clearScreen();
+        $('.list-goals').show();
+        $('.garden').show();
+    })
+};
+
+function creategoalsBtnClick() {
+    $('#creategoalsBtn').click(event => {
+        clearScreen();
+        $('.create-goal').show();
+    })
+};
+
+function clearScreen() {
+    $('.list-goals').hide();
+    $('.garden').hide();
+    $('.create-goal').hide();
+};
+
+
 function createGoal() {
     $('.create-goal').submit(event => {
         event.preventDefault();
@@ -21,7 +86,7 @@ function createGoal() {
 
         $.ajax({
             url: 'http://localhost:3232/goal/create',
-            headers: {"authorization": localStorage.getItem('token')},
+            headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
@@ -51,17 +116,18 @@ function displayGoals() {
     console.log('displayGoals function was called');
     $('.list-goals').empty();
     $.ajax({
-        url: 'http://localhost:3232/goal/all/' + localStorage.getItem("userId"),
-        headers: {"authorization": localStorage.getItem('token')},
+        url: 'http://localhost:3232/goal/all/' + localStorage.getItem('userId'),
+        headers: { "authorization": localStorage.getItem('token') },
         dataType: 'json',
         type: 'get',
         contentType: 'application/json',
 
         success: function(data) {
-
+            $('.list-goals').append(`<h2>My Goals:</h2>`);
             data.data.forEach((goal) => {
                 console.log(goal);
                 $('.list-goals').append(`
+                	
                 	<div class="my-goals" value="${goal.name}">
                 	<img class="seed" value="${goal._id}" src="images/seedling.png">
                 	<p value="${goal._id}">${goal.name}</p>
@@ -73,11 +139,13 @@ function displayGoals() {
         error: function(error) {
             console.log(error);
         }
+
     });
 };
 
 function displaySelectedGoal() {
     $('.list-goals').on('click', '.my-goals', (event) => {
+        $('.garden').show();
         $('html, body').animate({
             scrollTop: ($('.garden').offset().top)
         }, 500);
@@ -91,7 +159,7 @@ function displaySelectedGoal() {
 
         $.ajax({
             url: 'http://localhost:3232/goal/getbyid/' + event.target.attributes.value.nodeValue,
-            headers: {"authorization": localStorage.getItem('token')},
+            headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
@@ -102,6 +170,13 @@ function displaySelectedGoal() {
                 let goal = result.data;
                 console.log(goal);
 
+                $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
+                $('.garden').append(`Actions taken for <h3>${goal.name}:</h3>`);
+                //$('.garden').append(`<div class="actions></div>`);
+                goal.actions.forEach(action => {
+                    $('.garden').append(`<p class="single-action">${action}</p>`);
+                })
+                /*
                 if (goal.actions.length === 0) {
                     $('.garden').append(`<h3>${goal.name}</h3>`)
                     $('.garden').append(`<img class="action-seed" src="images/seed.png">`);
@@ -124,7 +199,7 @@ function displaySelectedGoal() {
 
 
 
-                }
+                }*/
             },
             error: function(error) {
                 console.log(error);
@@ -139,7 +214,7 @@ function submitAction() {
 
         $.ajax({
             url: 'http://localhost:3232/goal/addaction/' + $('.hidden-id').val(),
-            headers: {"authorization": localStorage.getItem('token')},
+            headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'put',
             contentType: 'application/json',
@@ -148,13 +223,13 @@ function submitAction() {
             success: function(data) {
                 console.log(data);
                 let action = $('.new-action').val();
-                $('.garden').append(`<p>${action}</p>`);
+                $('.garden').append(`<p class="single-action">${action}</p>`);
                 $('.new-action').val('');
                 $('.action-seed').addClass('action-seed-shake');
 
 
                 setTimeout(() => {
-                    $('.action-seed').attr('src', "images/plant01.png");
+                    $('.action-seed').attr('src', `images/${images[$('.single-action').length]}`);
                     $('.action-seed').removeClass('action-seed-shake');
 
                 }, 1000)
@@ -172,33 +247,47 @@ function submitAction() {
 function deleteAction() {
     $('.garden').on('click', '.delete', (event) => {
         console.log('delete button clicked')
-        $.ajax({
-            url: 'http://localhost:3232/goal/remove/' + $('.hidden-id').val(),
-            headers: {"authorization": localStorage.getItem('token')},
-            dataType: 'json',
-            type: 'delete',
-            contentType: 'application/json',
 
-            success: function(data) {
-                console.log(data);
-                $(event.target).parent().remove();
-                swal("Poof", "Goal was deleted!", "success");
-                $('.garden').html(`<h2>Nothing to see here :)</h2>`);
-                displayGoals();
-                //$('.list-goals').remove(`<div class="my-goals" value="${data.data.name}"><img class="seed" value="${data.data._id}" src="images/seedling.png"><p value="${data.data._id}">${data.data.name}</p></div>`);
-                //$('.list-goals').remove(data.data._id);
-            },
-            error: function(error) {
-                swal("Oh no!", "An error happened!", "error");
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            buttons: [true, "Yes, delete it!"],
+
+        }).then((result) => {
+            console.log(result);
+            if (result == true) {
+                $.ajax({
+                    url: 'http://localhost:3232/goal/remove/' + $('.hidden-id').val(),
+                    headers: { "authorization": localStorage.getItem('token') },
+                    dataType: 'json',
+                    type: 'delete',
+                    contentType: 'application/json',
+
+                    success: function(data) {
+                        console.log(data);
+                        $(event.target).parent().remove();
+                        swal("Poof", "Goal was deleted!", "success");
+                        $('.garden').html('');
+                        displayGoals();
+                    },
+                    error: function(error) {
+                        swal("Oh no!", "An error happened!", "error");
+                    }
+                });
+
             }
-        });
+        })
+
+
 
     })
 };
 
-
 function logIn() {
     $('.navbar').on('click', '.login-submit', (event) => {
+        event.preventDefault();
+        console.log('login submit btn clicked');
         $.ajax({
             url: 'http://localhost:3232/auth/login/',
             dataType: 'json',
@@ -210,38 +299,58 @@ function logIn() {
             }),
 
             success: function(data) {
-                console.log('login submit btn clicked');
+
                 console.log(data);
-                swal("Yay!", "You're in!", "success");
+
+
+
                 $('.email').val('');
                 $('.password').val('');
-                modal.style.display = "none";
+                loginmodal.style.display = "none";
                 localStorage.setItem("token", data.data.token);
                 localStorage.setItem("userId", data.data.userId);
+
+
+                displayGoals();
+                $('.masthead').hide();
+                $('#loginBtn').hide();
+                $('#logoutBtn').show();
+                $('#signinBtn').hide();
+                $('.list-goals').show();
+                $('.garden').show();
+                $('.left-navbar').show();
             },
             error: function(error) {
                 swal("Oh no!", "An error happened!", "error");
             }
         });
     })
-}
+};
 
 function logOut() {
-	$('#logoutBtn').click(event => {
-		localStorage.clear();
-	})
-}
+    $('#logoutBtn').click(event => {
+        localStorage.clear();
+        $('.masthead').show();
+        $('#logoutBtn').hide();
+        $('#loginBtn').show();
+        $('#signinBtn').show();
+        $('.list-goals').hide();
+        $('.garden').hide();
+        $('.left-navbar').hide();
+        $('.create-goal').hide();
+    })
+};
 
 function signUp() {
     $('.navbar').on('click', '.signup-submit', (event) => {
-    	event.preventDefault();
+        event.preventDefault();
         $.ajax({
             url: 'http://localhost:3232/auth/register/',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify({
-            	name: $('.signup-name').val(),
+                name: $('.signup-name').val(),
                 email: $('.signup-email').val(),
                 password: $('.signup-password').val()
             }),
@@ -253,72 +362,72 @@ function signUp() {
                 $('.signup-name').val('');
                 $('.signup-email').val('');
                 $('.signup-password').val('');
-                modal.style.display = "none";
-                
+                signupmodal.style.display = "none";
+
             },
             error: function(error) {
                 swal("Oh no!", "An error happened!", "error");
             }
         });
     })
-}
+};
 
 // Get the modal
-var modal = document.getElementById('myModal');
+const loginmodal = document.getElementById('loginModal');
 
 // Get the button that opens the modal
-var btn = document.getElementById("loginBtn");
+const btn = document.getElementById("loginBtn");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+const span = document.getElementsByClassName("login-close")[0];
 
 // When the user clicks on the button, open the modal 
 btn.onclick = function() {
-    modal.style.display = "block";
-}
+    loginmodal.style.display = "block";
+};
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-    modal.style.display = "none";
-}
+    loginmodal.style.display = "none";
+};
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
 
-var signupmodal = document.getElementById('signupModal');
+// Get the modal
+const signupmodal = document.getElementById('signupModal');
 
 // Get the button that opens the modal
-var signupbtn = document.getElementById("signinBtn");
+const signupbtn = document.getElementById("signinBtn");
 
 // Get the <span> element that closes the modal
-var signupspan = document.getElementsByClassName("close")[0];
+const signupspan = document.getElementsByClassName("signup-close")[0];
 
 // When the user clicks on the button, open the modal 
 signupbtn.onclick = function() {
     signupmodal.style.display = "block";
-}
+};
 
 // When the user clicks on <span> (x), close the modal
 signupspan.onclick = function() {
     signupmodal.style.display = "none";
-}
+};
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == signupmodal) {
+    if (event.target == signupmodal || event.target == loginmodal) {
         signupmodal.style.display = "none";
+        loginmodal.style.display = "none";
     }
-}
+};
 
-
+$(checkUserLogin);
+$(changeActiveNavbar);
+$(changeActiveGoals);
+$(creategoalsBtnClick);
+$(mygoalsBtnClick);
 $(signUp);
 $(logIn);
 $(logOut);
-$(displayGoals);
+
 $(createGoal);
 $(displaySelectedGoal);
 $(submitAction);

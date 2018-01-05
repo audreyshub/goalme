@@ -2,7 +2,28 @@ html {
     box-sizing: border-box;
 }
 
+.masthead-heading,
+.masthead-intro {
+    text-align: center;
+    color: black;
 
+}
+
+.masthead {
+    padding: 22em 0;
+    background-image: url('https://openclipart.org/download/99229/a-paisaje-boceto.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+.masthead-intro {
+    margin-bottom: 0.1em;
+}
+
+.masthead-heading {
+    margin-top: -0.1em;
+}
 
 .navbar {
     display: flex;
@@ -11,7 +32,19 @@ html {
 }
 
 .navbar button {
-	margin-left: 10px;
+    margin-left: 10px;
+
+}
+
+.navbar-active {
+	text-decoration: underline;
+}
+
+.goal-active {
+	border: 1px solid black;
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
 }
 
 .create-goal {
@@ -141,56 +174,83 @@ h2 {
     margin-left: 2px;
 }
 
-.login {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+.login,
+.signup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.login div {
-	margin: 10px;
+.login div,
+.signup div {
+    margin: 10px;
 }
 
-.email, .password {
-	min-width: 40vw;
-
+#logoutBtn {
+	display: none;
 }
+
 
 /* The Modal (background) */
+
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
 }
+
 
 /* Modal Content/Box */
+
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
+    /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%;
+    /* Could be more or less, depending on screen size */
 }
 
+
 /* The Close Button */
-.close {
+
+.login-close,
+.signup-close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
+.login-close:hover,
+.signup-close:hover,
+.login-close:focus,
+.signup-close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.button-link {
+	background: none;
+	border: none;
+	color: blue;
+	float: left;
 }
