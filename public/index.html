@@ -7,21 +7,24 @@
 </head>
 
 <body>
+    <div class="left-navbar">
+        <button id="mygoalsBtn" class="button-link navbar-active">MY GOALS</button>
+        <button id="creategoalsBtn" class="button-link">CREATE GOALS</button>
+    </div>
     <div class="navbar">
         <button id="loginBtn">Log in</button>
-        <button id="signinBtn">Sign up</button>
         <button id="logoutBtn">Log out</button>
-        <div id="myModal" class="modal">
+        <button id="signinBtn">Sign up</button>
+        <div id="loginModal" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="login-close">&times;</span>
                 <h2>Log in</h2>
                 <form class="login">
                     <div>
                         <label for "email">Email</label>
                         <input type="email" name="email" class="email" required/>
                     </div>
-                    
                     <div>
                         <label for "password">Password</label>
                         <input type="password" name="password" class="password" required/>
@@ -32,23 +35,20 @@
                 </form>
             </div>
         </div>
-
         <div id="signupModal" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="signup-close">&times;</span>
                 <h2>Sign up</h2>
                 <form class="signup">
-                	<div>
+                    <div>
                         <label for "name">Name</label>
                         <input type="text" name="name" class="signup-name" required/>
                     </div>
-
                     <div>
                         <label for "email">Email</label>
                         <input type="email" name="email" class="signup-email" required/>
                     </div>
-                    
                     <div>
                         <label for "password">Password</label>
                         <input type="password" name="password" class="signup-password" required/>
@@ -60,6 +60,13 @@
             </div>
         </div>
     </div>
+
+    <div class="masthead">
+        <p class="masthead-intro">Hi, welcome to</p>
+        <h1 class="masthead-heading">Goalme!</h1>
+        <p class="masthead-intro">Here you can track your goals and watch a garden grow as you take actions towards your goals.</p>
+    </div>
+
     <form class="create-goal">
         <div>
             <label for "name">Enter goal </label>
@@ -77,7 +84,9 @@
             <input type="submit" class="goal-submit" value="Submit" name="submit">
         </div>
     </form>
-    <h2>Your goals:</h2>
+    
+    
+
     <div class="list-goals">
     </div>
     <div class="garden">
