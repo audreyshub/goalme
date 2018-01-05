@@ -1,12 +1,16 @@
 html {
     box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.logo {
+	font-family: 'Bowlby One', cursive;
 }
 
 .masthead-heading,
 .masthead-intro {
     text-align: center;
     color: black;
-
 }
 
 .masthead {
@@ -14,15 +18,16 @@ html {
     background-image: url('https://openclipart.org/download/99229/a-paisaje-boceto.svg');
     background-size: cover;
     background-repeat: no-repeat;
-    
 }
 
 .masthead-intro {
     margin-bottom: 0.1em;
+    font-weight: bold;
 }
 
 .masthead-heading {
     margin-top: -0.1em;
+    font-family: 'Bowlby One', cursive;
 }
 
 .navbar {
@@ -33,18 +38,25 @@ html {
 
 .navbar button {
     margin-left: 10px;
+}
 
+.navbar button:hover {
+    cursor: pointer;
 }
 
 .navbar-active {
-	text-decoration: underline;
+    text-decoration: underline;
+
 }
 
 .goal-active {
-	border: 1px solid black;
+    text-decoration: underline;
+
+
+    /*border: 1px solid black;
 	border-radius: 50%;
 	width: 200px;
-	height: 200px;
+	height: 200px;*/
 }
 
 .create-goal {
@@ -84,15 +96,17 @@ h2 {
     align-items: center;
     flex-wrap: wrap;
     font-weight: bold;
+
     margin: 5px;
 }
 
 .my-goals:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .seed:hover {
-    max-height: 10vh;
+
     cursor: pointer;
 }
 
@@ -174,6 +188,7 @@ h2 {
     margin-left: 2px;
 }
 
+
 .login,
 .signup {
     display: flex;
@@ -188,14 +203,16 @@ h2 {
 }
 
 #logoutBtn {
-	display: none;
+    display: none;
 }
+
 
 
 /* The Modal (background) */
 
 .modal {
     display: none;
+
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
@@ -216,6 +233,7 @@ h2 {
 }
 
 
+
 /* Modal Content/Box */
 
 .modal-content {
@@ -226,7 +244,9 @@ h2 {
     border: 1px solid #888;
     width: 80%;
     /* Could be more or less, depending on screen size */
+
 }
+
 
 
 /* The Close Button */
@@ -242,15 +262,27 @@ h2 {
 .login-close:hover,
 .signup-close:hover,
 .login-close:focus,
-.signup-close:focus {
+.signup-close:focus,
+.login-submit:hover,
+.signup-submit:hover,
+.login-submit:focus,
+.signup-submit:focus,
+.goal-submit:hover,
+.goal-submit:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
 .button-link {
-	background: none;
-	border: none;
-	color: blue;
-	float: left;
+    background: none;
+    border: none;
+
+    float: left;
+}
+
+.button-link:hover {
+    
+    cursor: pointer;
+
 }

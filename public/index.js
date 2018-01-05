@@ -3,6 +3,7 @@ var images = ['seed.png', 'plant01.png', 'flower.png', 'garden.jpg'];
 function checkUserLogin() {
     if (localStorage.getItem('token')) {
         console.log('user is logged in');
+        
         $('.masthead').hide();
         $('.list-goals').show();
         $('.garden').show();
@@ -13,6 +14,7 @@ function checkUserLogin() {
         displayGoals();
     } else {
         console.log('user is NOT logged in');
+        
         $('.masthead').show();
         $('.list-goals').hide();
         $('.garden').hide();
@@ -123,7 +125,7 @@ function displayGoals() {
         contentType: 'application/json',
 
         success: function(data) {
-            $('.list-goals').append(`<h2>My Goals:</h2>`);
+            $('.list-goals').html(`<h2>My Goals:</h2>`);
             data.data.forEach((goal) => {
                 console.log(goal);
                 $('.list-goals').append(`
