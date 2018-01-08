@@ -8,61 +8,18 @@
 </head>
 
 <body>
-    
-    <div class="left-navbar">
+    <div>
         <p class="logo">Goalme!</p>
+    </div>
+    <div class="left-navbar">
         <button id="mygoalsBtn" class="button-link navbar-active">My goals</button>
         <button id="creategoalsBtn" class="button-link">Create goals</button>
     </div>
+
     <div class="navbar">
-        
         <button id="loginBtn">Log in</button>
         <button id="logoutBtn">Log out</button>
         <button id="signinBtn">Sign up</button>
-        <div id="loginModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="login-close">&times;</span>
-                <h2>Log in</h2>
-                <form class="login">
-                    <div>
-                        <label for "email">Email</label>
-                        <input type="email" name="email" class="email" required/>
-                    </div>
-                    <div>
-                        <label for "password">Password</label>
-                        <input type="password" name="password" class="password" required/>
-                    </div>
-                    <div>
-                        <input type="submit" class="login-submit" value="Submit" name="submit">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div id="signupModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="signup-close">&times;</span>
-                <h2>Sign up</h2>
-                <form class="signup">
-                    <div>
-                        <label for "name">First Name</label>
-                        <input type="text" name="name" class="signup-name" required/>
-                    </div>
-                    <div>
-                        <label for "email">Email</label>
-                        <input type="email" name="email" class="signup-email" required/>
-                    </div>
-                    <div>
-                        <label for "password">Password</label>
-                        <input type="password" name="password" class="signup-password" required/>
-                    </div>
-                    <div>
-                        <input type="submit" class="signup-submit" value="Submit" name="submit">
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 
     <div class="masthead">
@@ -73,28 +30,69 @@
 
     <form class="create-goal">
         <div>
-            <label for "name">Enter goal </label>
+            <label for="name">Enter goal </label>
             <input type="text" name="goal" placeholder="Exercise daily" required/>
         </div>
         <div>
-            <label for "start-date">Start date </label>
+            <label for="start-date">Start date </label>
             <input type="date" name="start-date" placeholder="Start date" required/>
         </div>
         <div>
-            <label for "end-date">End date </label>
+            <label for="end-date">End date </label>
             <input type="date" name="end-date" placeholder="End date">
         </div>
         <div>
             <input type="submit" class="goal-submit" value="Submit" name="submit">
         </div>
     </form>
-    
-    
 
     <div class="list-goals">
     </div>
+
     <div class="garden">
     </div>
+
+    <!--Modals-->
+    <div id="loginModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="login-close">&times;</span>
+            <h2>Log in</h2>
+            <form class="login">
+                <div>
+                    <input type="email" name="email" class="email" placeholder="Email" required/>
+                </div>
+                <div>
+                    <input type="password" name="password" class="password" placeholder="password" required/>
+                </div>
+                <div>
+                    <input type="submit" class="login-submit" value="Submit" name="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="signupModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="signup-close">&times;</span>
+            <h2>Sign up</h2>
+            <form class="signup">
+                <div>
+                    <input type="text" name="name" placeholder="Name" class="signup-name" required/>
+                </div>
+                <div>
+                    <input type="email" name="email" placeholder="Email" class="signup-email" required/>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password" class="signup-password" required/>
+                </div>
+                <div>
+                    <input type="submit" class="signup-submit" value="Submit" name="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/f69011a5ea.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Kalam');
+
 html {
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
@@ -162,6 +164,7 @@ h2 {
 .action-seed {
     align-items: flex-end;
     max-width: 15vh;
+    animation: float 6s ease-in-out infinite;
 }
 
 .action-plant {
@@ -239,11 +242,10 @@ h2 {
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
-    /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    /* Could be more or less, depending on screen size */
+    border: 5px solid #373750;
+    width: 35%;
+    border-radius: 5%;
 
 }
 
@@ -281,8 +283,53 @@ h2 {
     float: left;
 }
 
-.button-link:hover {
-    
-    cursor: pointer;
+/*JON's styles*/
+input, input {
+    padding: 5px;
+    border: 2px solid grey;
+    transition: all 0.3s ease-in;
+    outline: none;
+    width: 227px;
+}
 
+input[type="submit"] {
+    background: #383B53;
+    color: #DCEED1;
+    border: none;
+    padding: 13px;
+    font-size: 20px;
+}
+
+input:focus, input:focus {
+    border: 2px solid #2f2f2f;
+}
+
+h1, h2, h3 {
+    font-family: 'Kalam', cursive;
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.navbar button {
+    background: white;
+    outline: none;
+    border: 1px solid grey;
+    padding: 5px 13px;
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-20px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
+}
+
+.single-action {
+    border: 2px solid black;
+    padding: 5px 30px;
 }
