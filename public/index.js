@@ -1,9 +1,12 @@
-var images = ['seed.png', 'plant01.png', 'flower.png', 'garden.jpg'];
+const images = ['seed.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flower2.png',
+    'seed.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowers.png',
+    'seed.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowerbluepot.png'
+];
 
 function checkUserLogin() {
     if (localStorage.getItem('token')) {
         console.log('user is logged in');
-        
+
         $('.masthead').hide();
         $('.list-goals').show();
         $('.garden').show();
@@ -14,7 +17,7 @@ function checkUserLogin() {
         displayGoals();
     } else {
         console.log('user is NOT logged in');
-        
+
         $('.masthead').show();
         $('.list-goals').hide();
         $('.garden').hide();
@@ -152,12 +155,14 @@ function displaySelectedGoal() {
             scrollTop: ($('.garden').offset().top)
         }, 500);
         $('.garden').html(`<div><input type="button" class="delete" value="Delete goal"></div>`);
+        $('.garden').html(`<i class="fa fa-times fa-2x delete" aria-hidden="true" title="Delete goal"></i>`);
         $('.garden').append(`<h2>Enter actions:</h2>`);
         $('.garden').append(`<div>
                                 <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
                                 <input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}">
+                             	<input type="submit" class="action-submit" name="submit" value="Submit action">
                              </div>`);
-        $('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit"></div>`);
+        //$('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
 
         $.ajax({
             url: 'http://localhost:3232/goal/getbyid/' + event.target.attributes.value.nodeValue,
@@ -173,10 +178,10 @@ function displaySelectedGoal() {
                 console.log(goal);
 
                 $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
-                $('.garden').append(`Actions taken for <h3>${goal.name}:</h3>`);
+                $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
                 $('.garden').append(`<div class="actions"></div>`);
                 goal.actions.forEach(action => {
-                    debugger
+
                     $('.actions').append(`<p class="single-action">${action}</p>`);
                 })
                 /*
@@ -252,7 +257,7 @@ function deleteAction() {
         console.log('delete button clicked')
 
         swal({
-            title: 'Are you sure?',
+            title: 'Are you sure you want to delete this goal?',
             text: "You won't be able to revert this!",
             icon: 'warning',
             buttons: [true, "Yes, delete it!"],

@@ -6,11 +6,13 @@ html {
 }
 
 .logo {
-	font-family: 'Bowlby One', cursive;
+    font-family: 'Bowlby One', cursive;
+    font-size: 20px;
 }
 
 .masthead-heading,
 .masthead-intro {
+    margin: auto;
     text-align: center;
     color: black;
 }
@@ -40,10 +42,18 @@ html {
 
 .navbar button {
     margin-left: 10px;
+    font-size: 12px;
+    background: white;
+    outline: none;
+    border: 1px solid black;
+    padding: 5px 13px;
+    color: grey;
+    font-weight: bold;
 }
 
 .navbar button:hover {
     cursor: pointer;
+    color: black;
 }
 
 .navbar-active {
@@ -53,12 +63,22 @@ html {
 
 .goal-active {
     text-decoration: underline;
+    color: #ff3889;
 
-
-    /*border: 1px solid black;
+    /*border: 2px solid gray;
 	border-radius: 50%;
 	width: 200px;
 	height: 200px;*/
+}
+
+.new-action {
+    width: 40vw;
+    padding: 12px;
+    font-size: 14px;
+}
+
+.action-submit {
+    width: 15vw;
 }
 
 .create-goal {
@@ -75,7 +95,9 @@ html {
 }
 
 label {
+    font-family: 'Kalam', cursive;
     font-weight: bold;
+    font-size: 21px;
 }
 
 .seed {
@@ -98,8 +120,7 @@ h2 {
     align-items: center;
     flex-wrap: wrap;
     font-weight: bold;
-
-    margin: 5px;
+    margin: 10px;
 }
 
 .my-goals:hover {
@@ -157,14 +178,13 @@ h2 {
     min-height: 80vh;
 }
 
-.garden div {
-    margin: 10px;
-}
+
 
 .action-seed {
     align-items: flex-end;
     max-width: 15vh;
     animation: float 6s ease-in-out infinite;
+    margin-top: 30px;
 }
 
 .action-plant {
@@ -186,9 +206,16 @@ h2 {
 }
 
 .delete {
+    padding: 9px;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5vh;
+    font-size: 12px;
+    cursor: pointer;
+}
 
-    color: red;
-    margin-left: 2px;
+.delete:hover {
+    color: #ff3889;
 }
 
 
@@ -208,6 +235,9 @@ h2 {
 #logoutBtn {
     display: none;
 }
+
+
+
 
 
 
@@ -237,17 +267,23 @@ h2 {
 
 
 
+
+
+
 /* Modal Content/Box */
 
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
-    border: 5px solid #373750;
+    /*border: 5px solid #373750;*/
+    border: 5px solid gray;
     width: 35%;
     border-radius: 5%;
-
 }
+
+
+
 
 
 
@@ -264,60 +300,89 @@ h2 {
 .login-close:hover,
 .signup-close:hover,
 .login-close:focus,
-.signup-close:focus,
+.signup-close:focus {
+    color: #ff3889;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
 .login-submit:hover,
 .signup-submit:hover,
 .login-submit:focus,
 .signup-submit:focus,
 .goal-submit:hover,
-.goal-submit:focus {
+.goal-submit:focus,
+.action-submit:hover,
+.action-submit:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
+    opacity: 0.75
 }
 
 .button-link {
     background: none;
     border: none;
-
+    cursor: pointer;
     float: left;
+    font-size: 14px;
+    font-weight: bold;
+    
 }
 
+.button-link:hover {
+    color: black;
+}
+
+
+
+
 /*JON's styles*/
-input, input {
-    padding: 5px;
+
+input,
+input {
+    padding: 9px;
     border: 2px solid grey;
     transition: all 0.3s ease-in;
     outline: none;
-    width: 227px;
+    width: 300px;
+    font-size: 13px;
 }
 
 input[type="submit"] {
-    background: #383B53;
-    color: #DCEED1;
+    /*background: #383B53;
+    color: #DCEED1;*/
+    background: #ff3889;
+    border-radius: 2px;
+
     border: none;
     padding: 13px;
-    font-size: 20px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
-input:focus, input:focus {
+
+
+input:focus,
+input:focus {
     border: 2px solid #2f2f2f;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: 'Kalam', cursive;
     font-size: 35px;
     margin-bottom: 5px;
 }
 
-.navbar button {
-    background: white;
-    outline: none;
-    border: 1px solid grey;
-    padding: 5px 13px;
-}
 
-@keyframes float {
+
+
+
+
+/*@keyframes float {
     0% {
         transform: translatey(0px);
     }
@@ -327,7 +392,7 @@ h1, h2, h3 {
     100% {
         transform: translatey(0px);
     }
-}
+}*/
 
 .single-action {
     border: 2px solid black;
