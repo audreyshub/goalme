@@ -53,13 +53,14 @@ app.listen(port, () => {
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
 // and then assign a value to it in run
+
 let server;
 
 // this function connects to our database, then starts the server
 function runServer(databaseUrl=config.databaseUrl, port=config.localPort) {
 
   return new Promise((resolve, reject) => {
-    mongoose.connect(databaseUrl, err => {
+    mongoose.createConnection(databaseUrl, { useMongoClient: true }, err => {
       if (err) {
         return reject(err);
       }

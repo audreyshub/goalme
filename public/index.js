@@ -117,38 +117,72 @@ function createGoal() {
     })
 };
 
-function displayGoals() {
-    console.log('displayGoals function was called');
-    $('.list-goals').empty();
-    $.ajax({
-        url: 'http://localhost:3232/goal/all/' + localStorage.getItem('userId'),
-        headers: { "authorization": localStorage.getItem('token') },
-        dataType: 'json',
-        type: 'get',
-        contentType: 'application/json',
-
-        success: function(data) {
-            $('.list-goals').html(`<h2>My Goals:</h2>`);
-            data.data.forEach((goal) => {
-                console.log(goal);
-                $('.list-goals').append(`
+function renderGoals(goals) {
+    $('.list-goals').html(`<h2>My Goals:</h2>`);
+    goals.forEach((goal) => {
+        console.log(goal);
+        $('.list-goals').append(`
                 	
                 	<div class="my-goals" value="${goal.name}">
                 	<img class="seed" value="${goal._id}" src="images/seedling.png">
                 	<p value="${goal._id}">${goal.name}</p>
 
                 	</div>`);
+    })
+
+}
+
+function displayGoals(isDemo) {
+    if (isDemo) {
+        renderGoals(demoAccount);
+        $('.list-goals').on('click', '.my-goals', (event) => {
+            $('.garden').show();
+            $('html, body').animate({
+                scrollTop: ($('.garden').offset().top)
+            }, 500);
+            
+            $('.garden').html(`<h2>Enter actions:</h2>`);
+            $('.garden').append(`<div>
+                                <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
+                                <input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}">
+                             	<input type="submit" class="action-submit" name="submit" value="Submit action" disabled>
+                             </div>`);
+            let goal = demoAccount[0];
+            console.log(goal);
+
+            $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
+            $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
+            $('.garden').append(`<div class="actions"></div>`);
+            goal.actions.forEach(action => {
+
+                $('.actions').append(`<p class="single-action">${action}</p>`);
             })
+        })
+    } else {
+        console.log('displayGoals function was called');
+        $('.list-goals').empty();
+        $.ajax({
+            url: 'http://localhost:3232/goal/all/' + localStorage.getItem('userId'),
+            headers: { "authorization": localStorage.getItem('token') },
+            dataType: 'json',
+            type: 'get',
+            contentType: 'application/json',
 
-        },
-        error: function(error) {
-            console.log(error);
-        }
+            success: function(data) {
+                renderGoals(data.data);
 
-    });
+            },
+            error: function(error) {
+                console.log(error);
+            }
+
+        });
+    }
+
 };
 
 function displaySelectedGoal() {
+
     $('.list-goals').on('click', '.my-goals', (event) => {
         $('.garden').show();
         $('html, body').animate({
@@ -374,7 +408,8 @@ function signUp() {
 
             },
             error: function(error) {
-                swal("Oh no!", "An error happened!", "error");
+
+                swal("Oh no!", error.responseJSON.message, "error");
             }
         });
     })
@@ -427,6 +462,19 @@ window.onclick = function(event) {
     }
 };
 
+
+function demoClick() {
+    $('.demo').click(event => {
+        console.log(demoAccount);
+        displayGoals(true)
+        $('.masthead').hide();
+
+        $('.list-goals').show();
+        $('.garden').show();
+    })
+}
+
+$(demoClick);
 $(checkUserLogin);
 $(changeActiveNavbar);
 $(changeActiveGoals);
