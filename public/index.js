@@ -90,7 +90,7 @@ function createGoal() {
         $('input[name="end-date"]').val('');
 
         $.ajax({
-            url: 'http://localhost:3232/goal/create',
+            url: '/goal/create',
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'post',
@@ -162,7 +162,7 @@ function displayGoals(isDemo) {
         console.log('displayGoals function was called');
         $('.list-goals').empty();
         $.ajax({
-            url: 'http://localhost:3232/goal/all/' + localStorage.getItem('userId'),
+            url: '/goal/all/' + localStorage.getItem('userId'),
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'get',
@@ -199,7 +199,7 @@ function displaySelectedGoal() {
         //$('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
 
         $.ajax({
-            url: 'http://localhost:3232/goal/getbyid/' + event.target.attributes.value.nodeValue,
+            url: '/goal/getbyid/' + event.target.attributes.value.nodeValue,
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'get',
@@ -255,7 +255,7 @@ function submitAction() {
     $('.garden').on('click', '.action-submit', (event) => {
 
         $.ajax({
-            url: 'http://localhost:3232/goal/addaction/' + $('.hidden-id').val(),
+            url: '/goal/addaction/' + $('.hidden-id').val(),
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'put',
@@ -300,7 +300,7 @@ function deleteAction() {
             console.log(result);
             if (result == true) {
                 $.ajax({
-                    url: 'http://localhost:3232/goal/remove/' + $('.hidden-id').val(),
+                    url: '/goal/remove/' + $('.hidden-id').val(),
                     headers: { "authorization": localStorage.getItem('token') },
                     dataType: 'json',
                     type: 'delete',
@@ -331,7 +331,7 @@ function logIn() {
         event.preventDefault();
         console.log('login submit btn clicked');
         $.ajax({
-            url: 'http://localhost:3232/auth/login/',
+            url: '/auth/login/',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
@@ -387,7 +387,7 @@ function signUp() {
     $('body').on('click', '.signup-submit', (event) => {
         event.preventDefault();
         $.ajax({
-            url: 'http://localhost:3232/auth/register/',
+            url: '/auth/register/',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',

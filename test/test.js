@@ -18,7 +18,7 @@ describe('Get landing page', function() {
   
   it('should return 200 status code with html', function() {
     return chai.request(app)
-      .get('/')
+      .get('/index.html')
       .then(function(res) {
         res.should.have.status(200);
         res.should.be.html;

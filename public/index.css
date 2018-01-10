@@ -58,7 +58,6 @@ html {
 
 .navbar-active {
     text-decoration: underline;
-
 }
 
 .goal-active {
@@ -241,6 +240,7 @@ h2 {
 
 
 
+
 /* The Modal (background) */
 
 .modal {
@@ -270,6 +270,7 @@ h2 {
 
 
 
+
 /* Modal Content/Box */
 
 .modal-content {
@@ -281,6 +282,7 @@ h2 {
     width: 35%;
     border-radius: 5%;
 }
+
 
 
 
@@ -328,12 +330,12 @@ h2 {
     float: left;
     font-size: 14px;
     font-weight: bold;
-    
 }
 
 .button-link:hover {
     color: black;
 }
+
 
 
 
@@ -350,7 +352,8 @@ input {
     font-size: 13px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+.demo {
     /*background: #383B53;
     color: #DCEED1;*/
     background: #ff3889;
@@ -360,6 +363,13 @@ input[type="submit"] {
     padding: 13px;
     font-size: 15px;
     cursor: pointer;
+}
+
+.demo {
+    margin: 30px 383px;
+    text-align: center;
+    width: 20%;
+    font-weight: bold;
 }
 
 
@@ -376,6 +386,7 @@ h3 {
     font-size: 35px;
     margin-bottom: 5px;
 }
+
 
 
 
