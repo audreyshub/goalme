@@ -33,7 +33,7 @@ router.use(function(req, res, next) {
         if (error) {
             res.status(500).json({
                 message: "Token is invalid"
-            })
+            });
             return
         }
         //the token is valid, jump to route
@@ -70,6 +70,7 @@ router.route('/create')
 
 router.route('/all/:userId')
     .get((req, res) => {
+        console.log("under all/userid")
         goalModel.find({user: req.params.userId})
             .then((goals) => {
                 res.status(200).json({
