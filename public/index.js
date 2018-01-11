@@ -1,15 +1,16 @@
-const images = ['seed.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flower2.png',
-    'seed.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowers.png',
-    'seed.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowerbluepot.png'
+const images = ['seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flower2.png',
+    'seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowers.png',
+    'seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowerbluepot.png'
 ];
 
 function checkUserLogin() {
     if (localStorage.getItem('token')) {
         console.log('user is logged in');
 
-        $('.masthead').hide();
+        $('.masthead').css('visibility', 'hidden');
         $('.list-goals').show();
         $('.garden').show();
+
         $('.left-navbar').show();
         $('#logoutBtn').show();
         $('#signinBtn').hide();
@@ -137,6 +138,7 @@ function displayGoals(isDemo) {
         renderGoals(demoAccount);
         $('.list-goals').on('click', '.my-goals', (event) => {
             $('.garden').show();
+
             $('html, body').animate({
                 scrollTop: ($('.garden').offset().top)
             }, 500);
@@ -159,8 +161,9 @@ function displayGoals(isDemo) {
             })
         })
     } else {
+    	$('.garden').html('');
         console.log('displayGoals function was called');
-        $('.list-goals').empty();
+        
         $.ajax({
             url: 'https://rocky-island-77568.herokuapp.com/goal/all/' + localStorage.getItem('userId'),
             headers: { "authorization": localStorage.getItem('token') },
@@ -184,19 +187,20 @@ function displayGoals(isDemo) {
 function displaySelectedGoal() {
 
     $('.list-goals').on('click', '.my-goals', (event) => {
+        
         $('.garden').show();
+        $('.garden').empty();
         $('html, body').animate({
             scrollTop: ($('.garden').offset().top)
         }, 500);
-        $('.garden').html(`<div><input type="button" class="delete" value="Delete goal"></div>`);
+        //$('.garden').html(`<div><input type="button" class="delete" value="Delete goal"></div>`);
         $('.garden').html(`<i class="fa fa-times fa-2x delete" aria-hidden="true" title="Delete goal"></i>`);
         $('.garden').append(`<h2>Enter actions:</h2>`);
         $('.garden').append(`<div>
                                 <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
                                 <input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}">
-                             	<input type="submit" class="action-submit" name="submit" value="Submit action">
                              </div>`);
-        //$('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
+        $('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
 
         $.ajax({
             url: 'https://rocky-island-77568.herokuapp.com/goal/getbyid/' + event.target.attributes.value.nodeValue,
@@ -352,8 +356,9 @@ function logIn() {
                 localStorage.setItem("token", data.data.token);
                 localStorage.setItem("userId", data.data.userId);
 
+                
+                displayGoals(false);
 
-                displayGoals();
                 $('.masthead').hide();
                 $('#loginBtn').hide();
                 $('#logoutBtn').show();

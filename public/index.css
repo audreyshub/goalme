@@ -47,7 +47,7 @@ html {
     outline: none;
     border: 1px solid black;
     padding: 5px 13px;
-    
+
     font-weight: bold;
 }
 
@@ -77,7 +77,8 @@ html {
 }
 
 .action-submit {
-    width: 15vw;
+    width: 40vw;
+    margin-top: 15px;
 }
 
 .create-goal {
@@ -241,6 +242,7 @@ h2 {
 
 
 
+
 /* The Modal (background) */
 
 .modal {
@@ -271,6 +273,7 @@ h2 {
 
 
 
+
 /* Modal Content/Box */
 
 .modal-content {
@@ -282,6 +285,7 @@ h2 {
     width: 35%;
     border-radius: 5%;
 }
+
 
 
 
@@ -340,6 +344,7 @@ h2 {
 
 
 
+
 /*JON's styles*/
 
 input,
@@ -348,7 +353,7 @@ input {
     border: 2px solid grey;
     transition: all 0.3s ease-in;
     outline: none;
-    width: 300px;
+    width: 110px;
     font-size: 13px;
 }
 
@@ -393,6 +398,7 @@ h3 {
 
 
 
+
 /*@keyframes float {
     0% {
         transform: translatey(0px);
@@ -407,5 +413,35 @@ h3 {
 
 .single-action {
     border: 2px solid black;
-    padding: 5px 30px;
+    padding: 5px 10px;
+}
+
+
+
+
+
+/*when screen gets larger than 580px*/
+
+@media only screen and (min-width: 420px) {
+
+    input,
+    input {
+        width: 150px;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+
+    input,
+    input {
+        width: 200px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+
+    input,
+    input {
+        width: 300px;
+    }
 }
