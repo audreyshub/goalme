@@ -176,6 +176,7 @@ h2 {
     justify-content: center;
     align-items: center;
     min-height: 80vh;
+    min-width: 90vw;
 }
 
 
@@ -230,11 +231,14 @@ h2 {
 .login div,
 .signup div {
     margin: 10px;
+    width: 100%;
 }
 
 #logoutBtn {
     display: none;
 }
+
+
 
 
 
@@ -274,6 +278,8 @@ h2 {
 
 
 
+
+
 /* Modal Content/Box */
 
 .modal-content {
@@ -282,9 +288,11 @@ h2 {
     padding: 20px;
     /*border: 5px solid #373750;*/
     border: 5px solid gray;
-    width: 35%;
+    width: 90%;
     border-radius: 5%;
 }
+
+
 
 
 
@@ -345,15 +353,16 @@ h2 {
 
 
 
+
+
 /*JON's styles*/
 
-input,
 input {
-    padding: 9px;
-    border: 2px solid grey;
+    padding: 10px;
     transition: all 0.3s ease-in;
     outline: none;
-    width: 110px;
+    width: 100%;
+    box-sizing: border-box;
     font-size: 13px;
 }
 
@@ -399,7 +408,7 @@ h3 {
 
 
 
-/*@keyframes float {
+@keyframes float {
     0% {
         transform: translatey(0px);
     }
@@ -409,7 +418,11 @@ h3 {
     100% {
         transform: translatey(0px);
     }
-}*/
+}
+
+.actions {
+    width: 90%;
+}
 
 .single-action {
     border: 2px solid black;
@@ -420,28 +433,39 @@ h3 {
 
 
 
-/*when screen gets larger than 580px*/
+
+
+/*when screen gets larger than 420px*/
 
 @media only screen and (min-width: 420px) {
 
-    input,
-    input {
-        width: 150px;
+    .actions {
+        width: 75%;
+    }
+
+    .modal-content {
+        width: 75%;
     }
 }
 
 @media only screen and (min-width: 800px) {
 
-    input,
-    input {
-        width: 200px;
+    .actions {
+        width: 55%;
+    }
+
+    .modal-content {
+        width: 55%;
     }
 }
 
 @media only screen and (min-width: 1000px) {
 
-    input,
-    input {
-        width: 300px;
+    .actions {
+        width: 35%;
+    }
+
+    .modal-content {
+        width: 35%;
     }
 }
