@@ -47,13 +47,13 @@ html {
     outline: none;
     border: 1px solid black;
     padding: 5px 13px;
-    color: grey;
+    
     font-weight: bold;
 }
 
 .navbar button:hover {
     cursor: pointer;
-    color: black;
+    color: grey;
 }
 
 .navbar-active {
