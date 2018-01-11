@@ -90,7 +90,7 @@ function createGoal() {
         $('input[name="end-date"]').val('');
 
         $.ajax({
-            url: '/goal/create',
+            url: 'https://rocky-island-77568.herokuapp.com/goal/create',
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'post',
@@ -162,7 +162,7 @@ function displayGoals(isDemo) {
         console.log('displayGoals function was called');
         $('.list-goals').empty();
         $.ajax({
-            url: '/goal/all/' + localStorage.getItem('userId'),
+            url: 'https://rocky-island-77568.herokuapp.com/goal/all/' + localStorage.getItem('userId'),
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'get',
@@ -199,7 +199,7 @@ function displaySelectedGoal() {
         //$('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
 
         $.ajax({
-            url: '/goal/getbyid/' + event.target.attributes.value.nodeValue,
+            url: 'https://rocky-island-77568.herokuapp.com/goal/getbyid/' + event.target.attributes.value.nodeValue,
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'get',
@@ -255,7 +255,7 @@ function submitAction() {
     $('.garden').on('click', '.action-submit', (event) => {
 
         $.ajax({
-            url: '/goal/addaction/' + $('.hidden-id').val(),
+            url: 'https://rocky-island-77568.herokuapp.com/goal/addaction/' + $('.hidden-id').val(),
             headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'put',
@@ -300,7 +300,7 @@ function deleteAction() {
             console.log(result);
             if (result == true) {
                 $.ajax({
-                    url: '/goal/remove/' + $('.hidden-id').val(),
+                    url: 'https://rocky-island-77568.herokuapp.com/goal/remove/' + $('.hidden-id').val(),
                     headers: { "authorization": localStorage.getItem('token') },
                     dataType: 'json',
                     type: 'delete',
@@ -331,7 +331,7 @@ function logIn() {
         event.preventDefault();
         console.log('login submit btn clicked');
         $.ajax({
-            url: '/auth/login/',
+            url: 'https://rocky-island-77568.herokuapp.com/auth/login/',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
@@ -387,7 +387,7 @@ function signUp() {
     $('body').on('click', '.signup-submit', (event) => {
         event.preventDefault();
         $.ajax({
-            url: '/auth/register/',
+            url: 'https://rocky-island-77568.herokuapp.com/auth/register/',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
