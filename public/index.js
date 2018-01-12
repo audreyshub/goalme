@@ -7,7 +7,7 @@ function checkUserLogin() {
     if (localStorage.getItem('token')) {
         console.log('user is logged in');
 
-        $('.masthead').css('visibility', 'hidden');
+        $('.masthead').hide();
         $('.list-goals').show();
         $('.garden').show();
 
