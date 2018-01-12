@@ -2,6 +2,8 @@ const images = ['seed-glasses.png', 'germination.png', 'water.png', 'plant.png',
     'seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowers.png',
     'seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowerbluepot.png'
 ];
+const baseURL = "http://localhost:3232/";
+// const baseURL = "https://rocky-island-77568.herokuapp.com/";
 
 function checkUserLogin() {
     if (localStorage.getItem('token')) {
@@ -15,6 +17,7 @@ function checkUserLogin() {
         $('#logoutBtn').show();
         $('#signinBtn').hide();
         $('#loginBtn').hide();
+        $('.create-goal').hide();
         displayGoals();
     } else {
         console.log('user is NOT logged in');
@@ -33,7 +36,6 @@ function checkUserLogin() {
 
 function changeActiveNavbar() {
     $('body').on('click', '.left-navbar button', event => {
-        console.log('navbar btn clicked');
         $('.left-navbar button').removeClass('navbar-active');
         $(event.currentTarget).addClass('navbar-active');
     })
@@ -41,7 +43,6 @@ function changeActiveNavbar() {
 
 function changeActiveGoals() {
     $('body').on('click', '.my-goals', event => {
-        console.log('goal btn clicked');
         $('.my-goals').removeClass('goal-active');
         $(event.currentTarget).addClass('goal-active');
     })
@@ -68,17 +69,12 @@ function clearScreen() {
     $('.create-goal').hide();
 };
 
-
 function createGoal() {
     $('.create-goal').submit(event => {
         event.preventDefault();
         const goalTitle = $('input[name="goal"]').val();
         const goalStart = $('input[name="start-date"]').val();
         const goalEnd = $('input[name="end-date"]').val();
-
-        console.log(goalTitle);
-        console.log(goalStart);
-        console.log(goalEnd);
 
         const newGoal = {
             name: goalTitle,
@@ -91,14 +87,13 @@ function createGoal() {
         $('input[name="end-date"]').val('');
 
         $.ajax({
-            url: 'https://rocky-island-77568.herokuapp.com/goal/create',
-            headers: { "authorization": localStorage.getItem('token') },
+            url: baseURL + 'goal/create',
+            headers: {"authorization": localStorage.getItem('token')},
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify(newGoal),
-            success: function(data) {
-                console.log(data);
+            success: function (data) {
                 swal({
                     title: "Your goal was created!",
 
@@ -107,8 +102,7 @@ function createGoal() {
                 $('.list-goals').append(`<div class="my-goals" value="${data.data.name}"><img class="seed" value="${data.data._id}" src="images/seedling.png"><p value="${data.data._id}">${data.data.name}</p></div>`);
 
             },
-            error: function(error) {
-                console.log(error);
+            error: function (error) {
             }
         });
 
@@ -118,10 +112,22 @@ function createGoal() {
     })
 };
 
+function renderGoalsDemo(goals) {
+    $('.list-goals').html(`<h2>My Goals:</h2>`);
+    goals.forEach((goal) => {
+        $('.list-goals').append(`
+                	
+                	<div class="my-goals-demo" value="${goal.name}">
+                	<img class="seed" value="${goal._id}" src="images/seedling.png">
+                	<p value="${goal._id}">${goal.name}</p>
+
+                	</div>`);
+    })
+}
+
 function renderGoals(goals) {
     $('.list-goals').html(`<h2>My Goals:</h2>`);
     goals.forEach((goal) => {
-        console.log(goal);
         $('.list-goals').append(`
                 	
                 	<div class="my-goals" value="${goal.name}">
@@ -135,14 +141,14 @@ function renderGoals(goals) {
 
 function displayGoals(isDemo) {
     if (isDemo) {
-        renderGoals(demoAccount);
+        renderGoalsDemo(demoAccount);
         $('.list-goals').on('click', '.my-goals', (event) => {
             $('.garden').show();
 
             $('html, body').animate({
                 scrollTop: ($('.garden').offset().top)
             }, 500);
-            
+
             $('.garden').html(`<h2>Enter actions:</h2>`);
             $('.garden').append(`<div>
                                 <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
@@ -150,32 +156,29 @@ function displayGoals(isDemo) {
                              	<input type="submit" class="action-submit" name="submit" value="Submit action" disabled>
                              </div>`);
             let goal = demoAccount[0];
-            console.log(goal);
 
             $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
             $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
             $('.garden').append(`<div class="actions"></div>`);
             goal.actions.forEach(action => {
-
                 $('.actions').append(`<p class="single-action">${action}</p>`);
             })
         })
     } else {
-    	$('.garden').html('');
-        console.log('displayGoals function was called');
-        
+        $('.garden').html('');
+
         $.ajax({
-            url: 'https://rocky-island-77568.herokuapp.com/goal/all/' + localStorage.getItem('userId'),
-            headers: { "authorization": localStorage.getItem('token') },
+            url: baseURL + 'goal/all/' + localStorage.getItem('userId'),
+            headers: {"authorization": localStorage.getItem('token')},
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
 
-            success: function(data) {
+            success: function (data) {
                 renderGoals(data.data);
 
             },
-            error: function(error) {
+            error: function (error) {
                 console.log(error);
             }
 
@@ -184,12 +187,9 @@ function displayGoals(isDemo) {
 
 };
 
-function displaySelectedGoal() {
-
-    $('.list-goals').on('click', '.my-goals', (event) => {
-        
+function displaySelectedGoalDemo() {
+    $('body').on('click', '.my-goals-demo', (event) => {
         $('.garden').show();
-        $('.garden').empty();
         $('html, body').animate({
             scrollTop: ($('.garden').offset().top)
         }, 500);
@@ -202,52 +202,51 @@ function displaySelectedGoal() {
                              </div>`);
         $('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
 
+        let goal = demoAccount[0];
+        console.log(goal);
+
+        $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
+        $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
+        $('.garden').append(`<div class="actions"></div>`);
+        goal.actions.forEach(action => {
+
+            $('.actions').append(`<p class="single-action">${action}</p>`);
+        })
+    })
+}
+
+function displaySelectedGoal() {
+    $('body').on('click', '.my-goals', (event) => {
+        $('.garden').show();
+        $('html, body').animate({
+            scrollTop: ($('.garden').offset().top)
+        }, 500);
+        $('.garden').html(`<i class="fa fa-times fa-2x delete" aria-hidden="true" title="Delete goal"></i>`);
+        $('.garden').append(`<h2>Enter actions:</h2>`);
+        $('.garden').append(`<div>
+                                <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
+                                <input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}">
+                             </div>`);
+        $('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
+
         $.ajax({
-            url: 'https://rocky-island-77568.herokuapp.com/goal/getbyid/' + event.target.attributes.value.nodeValue,
-            headers: { "authorization": localStorage.getItem('token') },
+            url: baseURL + 'goal/getbyid/' + event.target.attributes.value.nodeValue,
+            headers: {"authorization": localStorage.getItem('token')},
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
 
-            success: function(result) {
-
-
+            success: function (result) {
                 let goal = result.data;
-                console.log(goal);
 
                 $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
                 $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
                 $('.garden').append(`<div class="actions"></div>`);
                 goal.actions.forEach(action => {
-
                     $('.actions').append(`<p class="single-action">${action}</p>`);
                 })
-                /*
-                if (goal.actions.length === 0) {
-                    $('.garden').append(`<h3>${goal.name}</h3>`)
-                    $('.garden').append(`<img class="action-seed" src="images/seed.png">`);
-                } else if (goal.actions.length === 1) {
-
-                    $('.garden').append(`<img class="action-seed" src="images/plant01.png">`);
-                    $('.garden').append(`Actions taken for <h3>${goal.name}:</h3>`);
-                    //$('.garden').append(`<div class="actions></div>`);
-                    goal.actions.forEach(action => {
-                        $('.garden').append(`<p>${action}</p>`);
-                    })
-                } else if (goal.actions.length === 2) {
-
-                    $('.garden').append(`<img class="action-seed action-plant-2" src="images/flower.png">`);
-                    $('.garden').append(`Actions taken for <h3>${goal.name}:</h3>`);
-                    //$('.garden').append(`<div class="actions></div>`);
-                    goal.actions.forEach(action => {
-                        $('.garden').append(`<p>${action}</p>`);
-                    })
-
-
-
-                }*/
             },
-            error: function(error) {
+            error: function (error) {
                 console.log(error);
             }
         });
@@ -259,14 +258,14 @@ function submitAction() {
     $('.garden').on('click', '.action-submit', (event) => {
 
         $.ajax({
-            url: 'https://rocky-island-77568.herokuapp.com/goal/addaction/' + $('.hidden-id').val(),
-            headers: { "authorization": localStorage.getItem('token') },
+            url: baseURL + 'goal/addaction/' + $('.hidden-id').val(),
+            headers: {"authorization": localStorage.getItem('token')},
             dataType: 'json',
             type: 'put',
             contentType: 'application/json',
-            data: JSON.stringify({ action: $('.new-action').val() }),
+            data: JSON.stringify({action: $('.new-action').val()}),
 
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
                 let action = $('.new-action').val();
                 $('.garden').append(`<p class="single-action">${action}</p>`);
@@ -281,9 +280,8 @@ function submitAction() {
                 }, 1000)
 
 
-
             },
-            error: function(error) {
+            error: function (error) {
                 swal("Oh no!", "An error happened!", "error");
             }
         });
@@ -304,27 +302,26 @@ function deleteAction() {
             console.log(result);
             if (result == true) {
                 $.ajax({
-                    url: 'https://rocky-island-77568.herokuapp.com/goal/remove/' + $('.hidden-id').val(),
-                    headers: { "authorization": localStorage.getItem('token') },
+                    url: baseURL + 'goal/remove/' + $('.hidden-id').val(),
+                    headers: {"authorization": localStorage.getItem('token')},
                     dataType: 'json',
                     type: 'delete',
                     contentType: 'application/json',
 
-                    success: function(data) {
+                    success: function (data) {
                         console.log(data);
                         $(event.target).parent().remove();
                         swal("Poof", "Goal was deleted!", "success");
                         $('.garden').html('');
                         displayGoals();
                     },
-                    error: function(error) {
+                    error: function (error) {
                         swal("Oh no!", "An error happened!", "error");
                     }
                 });
 
             }
         })
-
 
 
     })
@@ -335,7 +332,7 @@ function logIn() {
         event.preventDefault();
         console.log('login submit btn clicked');
         $.ajax({
-            url: 'https://rocky-island-77568.herokuapp.com/auth/login/',
+            url: baseURL + 'auth/login/',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
@@ -344,10 +341,9 @@ function logIn() {
                 password: $('.password').val()
             }),
 
-            success: function(data) {
+            success: function (data) {
 
                 console.log(data);
-
 
 
                 $('.email').val('');
@@ -356,7 +352,7 @@ function logIn() {
                 localStorage.setItem("token", data.data.token);
                 localStorage.setItem("userId", data.data.userId);
 
-                
+
                 displayGoals(false);
 
                 $('.masthead').hide();
@@ -367,7 +363,7 @@ function logIn() {
                 $('.garden').show();
                 $('.left-navbar').show();
             },
-            error: function(error) {
+            error: function (error) {
                 swal("Oh no!", "An error happened!", "error");
             }
         });
@@ -392,7 +388,7 @@ function signUp() {
     $('body').on('click', '.signup-submit', (event) => {
         event.preventDefault();
         $.ajax({
-            url: 'https://rocky-island-77568.herokuapp.com/auth/register/',
+            url: baseURL + 'auth/register/',
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
@@ -402,7 +398,7 @@ function signUp() {
                 password: $('.signup-password').val()
             }),
 
-            success: function(data) {
+            success: function (data) {
                 console.log('signup submit btn clicked');
                 console.log(data);
                 swal("Yay!", "You're signed up!", "success");
@@ -412,7 +408,7 @@ function signUp() {
                 signupmodal.style.display = "none";
 
             },
-            error: function(error) {
+            error: function (error) {
 
                 swal("Oh no!", error.responseJSON.message, "error");
             }
@@ -429,13 +425,13 @@ const btn = document.getElementById("loginBtn");
 // Get the <span> element that closes the modal
 const span = document.getElementsByClassName("login-close")[0];
 
-// When the user clicks on the button, open the modal 
-btn.onclick = function() {
+// When the user clicks on the button, open the modal
+btn.onclick = function () {
     loginmodal.style.display = "block";
 };
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+span.onclick = function () {
     loginmodal.style.display = "none";
 };
 
@@ -449,18 +445,18 @@ const signupbtn = document.getElementById("signinBtn");
 // Get the <span> element that closes the modal
 const signupspan = document.getElementsByClassName("signup-close")[0];
 
-// When the user clicks on the button, open the modal 
-signupbtn.onclick = function() {
+// When the user clicks on the button, open the modal
+signupbtn.onclick = function () {
     signupmodal.style.display = "block";
 };
 
 // When the user clicks on <span> (x), close the modal
-signupspan.onclick = function() {
+signupspan.onclick = function () {
     signupmodal.style.display = "none";
 };
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onclick = function (event) {
     if (event.target == signupmodal || event.target == loginmodal) {
         signupmodal.style.display = "none";
         loginmodal.style.display = "none";
@@ -470,7 +466,7 @@ window.onclick = function(event) {
 
 function demoClick() {
     $('.demo').click(event => {
-        console.log(demoAccount);
+        $('.garden').html('');
         displayGoals(true)
         $('.masthead').hide();
 
@@ -491,5 +487,6 @@ $(logOut);
 
 $(createGoal);
 $(displaySelectedGoal);
+$(displaySelectedGoalDemo);
 $(submitAction);
 $(deleteAction);
