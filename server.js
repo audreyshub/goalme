@@ -57,7 +57,7 @@ app.listen(port, () => {
 let server;
 
 // this function connects to our database, then starts the server
-function runServer(databaseUrl=config.databaseUrl, port=config.localPort) {
+function runServer(databaseUrl = config.databaseUrl, port=config.localPort) {
 
   return new Promise((resolve, reject) => {
     mongoose.createConnection(databaseUrl, { useMongoClient: true }, err => {

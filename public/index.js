@@ -1,8 +1,8 @@
 const germinationImages = ['seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png'];
 const flowerImages = ['flower2.png', 'flowers.png', 'flowerbluepot.png', 'redleafplant.png', '3redflower.png', 'happyplant.png', 'palm-tree.png'];
 
-const baseURL = "http://localhost:3232/";
-// const baseURL = "https://rocky-island-77568.herokuapp.com/";
+//const baseURL = "http://localhost:3232/";
+const baseURL = "https://rocky-island-77568.herokuapp.com/";
 
 function checkUserLogin() {
     if (localStorage.getItem('token')) {
