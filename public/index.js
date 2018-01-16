@@ -1,7 +1,6 @@
-const images = ['seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flower2.png',
-    'seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowers.png',
-    'seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png', 'flowerbluepot.png'
-];
+const germinationImages = ['seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png'];
+const flowerImages = ['flower2.png', 'flowers.png', 'flowerbluepot.png', 'redleafplant.png', '3redflower.png', 'happyplant.png', 'palm-tree.png'];
+
 const baseURL = "http://localhost:3232/";
 // const baseURL = "https://rocky-island-77568.herokuapp.com/";
 
@@ -12,7 +11,7 @@ function checkUserLogin() {
         $('.masthead').hide();
         $('.list-goals').show();
         $('.garden').show();
-
+        $('.back').hide();
         $('.left-navbar').show();
         $('#logoutBtn').show();
         $('#signinBtn').hide();
@@ -21,7 +20,7 @@ function checkUserLogin() {
         displayGoals();
     } else {
         console.log('user is NOT logged in');
-
+        $('.back').hide();
         $('.masthead').show();
         $('.list-goals').hide();
         $('.garden').hide();
@@ -88,22 +87,17 @@ function createGoal() {
 
         $.ajax({
             url: baseURL + 'goal/create',
-            headers: {"authorization": localStorage.getItem('token')},
+            headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify(newGoal),
-            success: function (data) {
-                swal({
-                    title: "Your goal was created!",
-
-                    icon: "success"
-                });
-                $('.list-goals').append(`<div class="my-goals" value="${data.data.name}"><img class="seed" value="${data.data._id}" src="images/seedling.png"><p value="${data.data._id}">${data.data.name}</p></div>`);
+            success: function(data) {
+                swal("Hooray!", "Your goal was created", "success");
+                $('.list-goals').append(`<div class="my-goals" value="${data.data.name}"><img class="seed" value="${data.data._id}" src="images/germination.png"><p value="${data.data._id}">${data.data.name}</p></div>`);
 
             },
-            error: function (error) {
-            }
+            error: function(error) {}
         });
 
 
@@ -113,29 +107,33 @@ function createGoal() {
 };
 
 function renderGoalsDemo(goals) {
-    $('.list-goals').html(`<h2>My Goals:</h2>`);
+    $('.list-goals').html(`<h2>Goals:</h2>`);
+    $('.back').show();
     goals.forEach((goal) => {
         $('.list-goals').append(`
                 	
                 	<div class="my-goals-demo" value="${goal.name}">
-                	<img class="seed" value="${goal._id}" src="images/seedling.png">
+                	<img class="seed" value="${goal._id}" src="images/germination.png">
                 	<p value="${goal._id}">${goal.name}</p>
 
                 	</div>`);
     })
+    $('.garden').html(`<h2>Thanks for visiting our demo version!</h2><br><p class="demo-p">Click on a goal to demo Goalme!</p><br><p class="demo-p">Please note, actions can not be saved or deleted.</p><img class="action-seed" src="images/seed-glasses.png">`);
+
 }
 
 function renderGoals(goals) {
-    $('.list-goals').html(`<h2>My Goals:</h2>`);
+    $('.list-goals').html(`<h2>Goals:</h2>`);
     goals.forEach((goal) => {
         $('.list-goals').append(`
                 	
                 	<div class="my-goals" value="${goal.name}">
-                	<img class="seed" value="${goal._id}" src="images/seedling.png">
+                	<img class="seed" value="${goal._id}" src="images/germination.png">
                 	<p value="${goal._id}">${goal.name}</p>
 
                 	</div>`);
     })
+    $('.garden').html(`<h2>Click on a goal to enter actions!</h2><h2>To create a new goal click on the Create Goals link!</h2><img class="action-seed" src="images/seed-glasses.png">`);
 
 }
 
@@ -156,8 +154,15 @@ function displayGoals(isDemo) {
                              	<input type="submit" class="action-submit" name="submit" value="Submit action" disabled>
                              </div>`);
             let goal = demoAccount[0];
+            let imageUrl;
+            if (goal.actions.length <= germinationImages.length) {
+                imageUrl = `images/${germinationImages[goals.actions.length-1]}`;
+            } else {
+                let randomPosition = Math.floor(Math.random() * (flowerImages.length));
+                imageUrl = `images/${flowerImages[randomPosition]}`;
+            }
 
-            $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
+            $('.garden').append(`<img class="action-seed" src="${imageUrl}">`);
             $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
             $('.garden').append(`<div class="actions"></div>`);
             goal.actions.forEach(action => {
@@ -165,20 +170,20 @@ function displayGoals(isDemo) {
             })
         })
     } else {
-        $('.garden').html('');
+        $('.garden').html(`<h2>Click on a goal to enter actions!</h2><img class="action-seed" src="images/seed-glasses.png">`);
 
         $.ajax({
             url: baseURL + 'goal/all/' + localStorage.getItem('userId'),
-            headers: {"authorization": localStorage.getItem('token')},
+            headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
 
-            success: function (data) {
+            success: function(data) {
                 renderGoals(data.data);
 
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
             }
 
@@ -204,8 +209,13 @@ function displaySelectedGoalDemo() {
 
         let goal = demoAccount[0];
         console.log(goal);
-
-        $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
+        if (goal.actions.length <= germinationImages.length) {
+            imageUrl = `images/${germinationImages[goals.actions.length-1]}`;
+        } else {
+            let randomPosition = Math.floor(Math.random() * (flowerImages.length));
+            imageUrl = `images/${flowerImages[randomPosition]}`;
+        }
+        $('.garden').append(`<img class="action-seed" src="${imageUrl}">`);
         $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
         $('.garden').append(`<div class="actions"></div>`);
         goal.actions.forEach(action => {
@@ -231,22 +241,28 @@ function displaySelectedGoal() {
 
         $.ajax({
             url: baseURL + 'goal/getbyid/' + event.target.attributes.value.nodeValue,
-            headers: {"authorization": localStorage.getItem('token')},
+            headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'get',
             contentType: 'application/json',
 
-            success: function (result) {
+            success: function(result) {
                 let goal = result.data;
-
-                $('.garden').append(`<img class="action-seed" src="images/${images[goal.actions.length]}">`);
+                let imageUrl;
+                if (goal.actions.length < germinationImages.length) {
+                    imageUrl = `images/${germinationImages[goal.actions.length]}`;
+                } else {
+                    let randomPosition = Math.floor(Math.random() * (flowerImages.length));
+                    imageUrl = `images/${flowerImages[randomPosition]}`;
+                }
+                $('.garden').append(`<img class="action-seed" src="${imageUrl}">`);
                 $('.garden').append(`<p>Actions taken for</p> <h3>${goal.name}:</h3>`);
                 $('.garden').append(`<div class="actions"></div>`);
                 goal.actions.forEach(action => {
                     $('.actions').append(`<p class="single-action">${action}</p>`);
                 })
             },
-            error: function (error) {
+            error: function(error) {
                 console.log(error);
             }
         });
@@ -259,13 +275,13 @@ function submitAction() {
 
         $.ajax({
             url: baseURL + 'goal/addaction/' + $('.hidden-id').val(),
-            headers: {"authorization": localStorage.getItem('token')},
+            headers: { "authorization": localStorage.getItem('token') },
             dataType: 'json',
             type: 'put',
             contentType: 'application/json',
-            data: JSON.stringify({action: $('.new-action').val()}),
+            data: JSON.stringify({ action: $('.new-action').val() }),
 
-            success: function (data) {
+            success: function(data) {
                 console.log(data);
                 let action = $('.new-action').val();
                 $('.garden').append(`<p class="single-action">${action}</p>`);
@@ -274,14 +290,23 @@ function submitAction() {
 
 
                 setTimeout(() => {
-                    $('.action-seed').attr('src', `images/${images[$('.single-action').length]}`);
+                	let goal = data.data
+                    let imageUrl;
+                    
+                    if ($('.single-action').length < germinationImages.length) {
+                        imageUrl = `images/${germinationImages[goal.actions.length+1]}`;
+                    } else {
+                        let randomPosition = Math.floor(Math.random() * (flowerImages.length));
+                        imageUrl = `images/${flowerImages[randomPosition]}`;
+                    }
+                    $('.action-seed').attr('src', `${imageUrl}`);
                     $('.action-seed').removeClass('action-seed-shake');
 
                 }, 1000)
 
 
             },
-            error: function (error) {
+            error: function(error) {
                 swal("Oh no!", "An error happened!", "error");
             }
         });
@@ -303,19 +328,20 @@ function deleteAction() {
             if (result == true) {
                 $.ajax({
                     url: baseURL + 'goal/remove/' + $('.hidden-id').val(),
-                    headers: {"authorization": localStorage.getItem('token')},
+                    headers: { "authorization": localStorage.getItem('token') },
                     dataType: 'json',
                     type: 'delete',
                     contentType: 'application/json',
 
-                    success: function (data) {
+                    success: function(data) {
                         console.log(data);
-                        $(event.target).parent().remove();
-                        swal("Poof", "Goal was deleted!", "success");
+
+                        swal("Poof", "Your goal was deleted!", "success");
                         $('.garden').html('');
+
                         displayGoals();
                     },
-                    error: function (error) {
+                    error: function(error) {
                         swal("Oh no!", "An error happened!", "error");
                     }
                 });
@@ -341,7 +367,7 @@ function logIn() {
                 password: $('.password').val()
             }),
 
-            success: function (data) {
+            success: function(data) {
 
                 console.log(data);
 
@@ -354,7 +380,7 @@ function logIn() {
 
 
                 displayGoals(false);
-
+                $('.back').hide();
                 $('.masthead').hide();
                 $('#loginBtn').hide();
                 $('#logoutBtn').show();
@@ -363,7 +389,7 @@ function logIn() {
                 $('.garden').show();
                 $('.left-navbar').show();
             },
-            error: function (error) {
+            error: function(error) {
                 swal("Oh no!", "An error happened!", "error");
             }
         });
@@ -373,6 +399,7 @@ function logIn() {
 function logOut() {
     $('#logoutBtn').click(event => {
         localStorage.clear();
+
         $('.masthead').show();
         $('#logoutBtn').hide();
         $('#loginBtn').show();
@@ -382,6 +409,21 @@ function logOut() {
         $('.left-navbar').hide();
         $('.create-goal').hide();
     })
+};
+
+function backToHomepage() {
+	$('body').on('click', '#back-button', (event) => {
+		console.log('back button clicked');
+		$('.back').hide();
+		$('.masthead').show();
+        $('#logoutBtn').hide();
+        $('#loginBtn').show();
+        $('#signinBtn').show();
+        $('.list-goals').hide();
+        $('.garden').hide();
+        $('.left-navbar').hide();
+        $('.create-goal').hide();
+	})
 };
 
 function signUp() {
@@ -398,7 +440,7 @@ function signUp() {
                 password: $('.signup-password').val()
             }),
 
-            success: function (data) {
+            success: function(data) {
                 console.log('signup submit btn clicked');
                 console.log(data);
                 swal("Yay!", "You're signed up!", "success");
@@ -408,7 +450,7 @@ function signUp() {
                 signupmodal.style.display = "none";
 
             },
-            error: function (error) {
+            error: function(error) {
 
                 swal("Oh no!", error.responseJSON.message, "error");
             }
@@ -426,12 +468,12 @@ const btn = document.getElementById("loginBtn");
 const span = document.getElementsByClassName("login-close")[0];
 
 // When the user clicks on the button, open the modal
-btn.onclick = function () {
+btn.onclick = function() {
     loginmodal.style.display = "block";
 };
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function () {
+span.onclick = function() {
     loginmodal.style.display = "none";
 };
 
@@ -446,17 +488,17 @@ const signupbtn = document.getElementById("signinBtn");
 const signupspan = document.getElementsByClassName("signup-close")[0];
 
 // When the user clicks on the button, open the modal
-signupbtn.onclick = function () {
+signupbtn.onclick = function() {
     signupmodal.style.display = "block";
 };
 
 // When the user clicks on <span> (x), close the modal
-signupspan.onclick = function () {
+signupspan.onclick = function() {
     signupmodal.style.display = "none";
 };
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == signupmodal || event.target == loginmodal) {
         signupmodal.style.display = "none";
         loginmodal.style.display = "none";
@@ -484,7 +526,7 @@ $(mygoalsBtnClick);
 $(signUp);
 $(logIn);
 $(logOut);
-
+$(backToHomepage);
 $(createGoal);
 $(displaySelectedGoal);
 $(displaySelectedGoalDemo);

@@ -11,7 +11,8 @@
     "faker": "^4.1.0",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.7",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "node-sass": "^4.7.2"
   },
   "devDependencies": {
     "chai-http": "^3.0.0",
@@ -19,7 +20,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

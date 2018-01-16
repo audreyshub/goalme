@@ -4,7 +4,7 @@
 <head>
     <title>Goals Project</title>
     <link rel="stylesheet" type="text/css" href="index.css">
-    <link href="https://fonts.googleapis.com/css?family=Bowlby+One|Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kalam|Bowlby+One|Open+Sans" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -12,10 +12,13 @@
     <div>
         <p class="logo">Goalme!</p>
     </div>
-
+    <div class="back">
+        <button id="back-button" class="button-link"><i class="fa fa-arrow-left" aria-hidden="true"></i>Back to homepage</button>
+    </div>
     <div class="left-navbar">
         <button id="mygoalsBtn" class="button-link navbar-active">My goals</button>
         <button id="creategoalsBtn" class="button-link">Create goals</button>
+
     </div>
 
     <div class="navbar">
@@ -29,20 +32,22 @@
         
         <p class="masthead-intro">Hi, welcome to</p>
         <h1 class="masthead-heading">Goalme!</h1>
-        <p class="masthead-intro">Here you can track your goals and watch a garden grow as you take actions towards your goals.</p>
-        <button class="demo">View demo</button>
+        <p class="masthead-intro">a full stack NODE Express app built with <i class="fa fa-heart" aria-hidden="true"></i> by AUDREY WONG.</p>
+        <br>
+        <p class="masthead-intro">You can use this app to track goals and watch a garden grow as you take actions towards your goals.</p>
+        <p class="masthead-intro"><button class="demo">View demo</button></p>
     </div>
 
     <form class="create-goal">
         <div>
-            <label for="name">Enter goal </label>
+            <label for="name">Enter goal* </label>
             <br>
             <input type="text" name="goal" placeholder="Exercise daily" required/>
         </div>
         <div>
             <label for="start-date">Start date </label>
             <br>
-            <input type="date" name="start-date" placeholder="Start date" required/>
+            <input type="date" name="start-date" placeholder="Start date">
         </div>
         <div>
             <label for="end-date">End date </label>
@@ -104,7 +109,7 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <!--<script src="https://use.fontawesome.com/f69011a5ea.js"></script>-->
+    <script src="https://use.fontawesome.com/f69011a5ea.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="demo.js"></script>
     <script type="text/javascript" src="index.js"></script>

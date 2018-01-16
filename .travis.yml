@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: YAhmi/dyu6YNAKCA3Dep0Bd2enkdb4zk/vBDtsGfaXmX5JmBsj/WVQPMQPmWynBHoqirNrKleuzR8J80PYuOqIWBuoYgViMaK9Gr8DgchQlQEpBFcPA0NfY18R++cEICLqn3szEm6ALxUS8nnQ3R0W15TGyX5yY39QIFMtwZg4n+a1xruIdEe3uauriSu00UjPW9DUjW3n3emCkB5xYUb6YwOZDDFVmQ6fuTNrWf0MCvGHKFbBXaxXYuHTeM4HUljaEwD1lUcEtZ8c0gBdqVfm2bVWXTk4/UPNuFrL3uPTIE1iFoq6+5OGz4mY7JvfrA4OzvgJ+V5gEH9zF/F4CsEQwdK33LJEXTGzvrMvUmy1sl7VepjnRzwQbryJEo2L3OpS93u+2hL+zP4sHnctl+ifjm1Ehzl0Ge+aUoa+MPfZsoYVIFiPAUI7b6cOb2K8IBAKHp8xuz+N/12duUGuX99eRycI2JuloHpbqiwtIDxqN4abPD1+URrOVFXomK5OqRI26vpkr6q3rnunY/f7k7/r7vAAbBrI5MK/0oizJDy8g054n/s38e8NyGRELBfxVuhieDAWRSeoiHJzo+Wm3wQBMnNBiujsdPjiyo0b/tiuY/hz+MMzjnBhjHbg2nWt7qnHQRanB4nlX1ZL3H9wDgW4s0jo+sf7lW8XG/7+Nlm5o=
+  app: rocky-island-77568
+  on:
+    repo: audreyshub/goals-project
