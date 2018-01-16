@@ -10,13 +10,13 @@ const should = chai.should();
 
 const { Goal } = require('../models/goals-model.js');
 const { closeServer, runServer, app } = require('../server');
-const { TEST_DATABASE_URL } = require('../config');
+const { databaseUrl } = require('../config');
 
 chai.use(chaiHttp);
 
 describe('Get landing page', function() {
   before(function() {
-    return runServer();
+    return runServer(databaseUrl);
   });
 
   after(function() {
