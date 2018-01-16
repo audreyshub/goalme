@@ -118,7 +118,7 @@ function renderGoalsDemo(goals) {
 
                 	</div>`);
     })
-    $('.garden').html(`<h2>Thanks for visiting our demo version!</h2><br><p class="demo-p">Click on a goal to demo Goalme!</p><br><p class="demo-p">Please note, actions can not be saved or deleted.</p><img class="action-seed" src="images/seed-glasses.png">`);
+    $('.garden').html(`<h2>Thanks for visiting our demo version!</h2><br><p class="demo-p">Click on a goal above to demo Goalme!</p><br><p class="demo-p">Please note, actions can not be saved or deleted.</p><img class="action-seed" src="images/seed-glasses.png">`);
 
 }
 
@@ -133,7 +133,7 @@ function renderGoals(goals) {
 
                 	</div>`);
     })
-    $('.garden').html(`<h2>Click on a goal to enter actions!</h2><h2>To create a new goal click on the Create Goals link!</h2><img class="action-seed" src="images/seed-glasses.png">`);
+    $('.garden').html(`<h2>Click on a goal to enter actions or click Create Goals to create a goal!</h2><img class="action-seed" src="images/seed-glasses.png">`);
 
 }
 
@@ -307,7 +307,8 @@ function submitAction() {
 
             },
             error: function(error) {
-                swal("Oh no!", "An error happened!", "error");
+            	
+                swal("Oh no!", error.responseJSON.message, "error");
             }
         });
     })
@@ -342,7 +343,7 @@ function deleteAction() {
                         displayGoals();
                     },
                     error: function(error) {
-                        swal("Oh no!", "An error happened!", "error");
+                        swal("Oh no!", error.responseJSON.message, "error");
                     }
                 });
 
@@ -356,7 +357,9 @@ function deleteAction() {
 function logIn() {
     $('body').on('click', '.login-submit', (event) => {
         event.preventDefault();
+
         console.log('login submit btn clicked');
+        console.log($('.email').val());
         $.ajax({
             url: baseURL + 'auth/login/',
             dataType: 'json',
@@ -390,7 +393,8 @@ function logIn() {
                 $('.left-navbar').show();
             },
             error: function(error) {
-                swal("Oh no!", "An error happened!", "error");
+
+                swal("Oh no!", error.responseJSON.message, "error");
             }
         });
     })
@@ -514,6 +518,9 @@ function demoClick() {
 
         $('.list-goals').show();
         $('.garden').show();
+        $('html, body').animate({
+            scrollTop: ($('.garden').offset().top)
+        }, 500);
     })
 }
 

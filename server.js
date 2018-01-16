@@ -59,20 +59,42 @@ let server;
 // this function connects to our database, then starts the server
 function runServer() {
 
-    mongoose.connect(config.databaseUrl, { useMongoClient: true });
-    db.on('error', console.error.bind(console, 'Connection error:'));
-    db.once('open', () => {
-        console.log('Connected to a database')
+    return new Promise((resolve, reject) => {
+        mongoose.connect(config.TEST_DATABASE_URL, { useMongoClient: true });
+        let db = mongoose.connection;
+        db.on('error', err => {
+            mongoose.disconnect();
+            reject(err);
+            console.log(`server connection error: ${err}`);
+        });
+        db.once('open', () => {
+            console.log(`connected to database: ${config.TEST_DATABASE_URL}`);
+        });
+        server = app.listen(config.testingPort, () => {
+            console.log(`your server is running on port: ${config.testingPort}`);
+            resolve();
+        });
     });
 }
+
+
 
 // this function closes the server, and returns a promise. we'll
 // use it in our integration tests later.
 function closeServer() {
-    mongoose.disconnect(config.databaseUrl);
-    db.once('close', () => {
-    	console.log('Closed database');
-    })
+    return mongoose.disconnect()
+        .then(() => {
+            return new Promise((resolve, reject) => {
+                console.log('closing server');
+                server.close((err) => {
+                    process.exit(0)
+                    if (err) {
+                        return reject();
+                    }
+                    resolve();
+                });
+            });
+        });
 }
 
 // if server.js is called directly (aka, with `node server.js`), this block
