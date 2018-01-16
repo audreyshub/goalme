@@ -77,9 +77,9 @@ function closeServer() {
 
 // if server.js is called directly (aka, with `node server.js`), this block
 // runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
-if (require.main === module) {
+/*if (require.main === module) {
     runServer().catch(err => console.error(err));
-};
+};*/
 
 module.exports = { app, runServer, closeServer };
 
