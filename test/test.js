@@ -15,7 +15,13 @@ const { databaseUrl } = require('../config');
 chai.use(chaiHttp);
 
 describe('Get landing page', function() {
+  before(function() {
+    return runServer();
+  });
   
+  after(function() {
+    return closeServer();
+  });
 
   it('should return 200 status code with html', function() {
     return chai.request(app)
