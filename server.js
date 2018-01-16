@@ -69,7 +69,7 @@ function runServer() {
 // this function closes the server, and returns a promise. we'll
 // use it in our integration tests later.
 function closeServer() {
-    mongoose.disconnect(config.databaseUrl, { useMongoClient: true });
+    mongoose.disconnect(config.databaseUrl);
     db.once('close', () => {
     	console.log('Closed database');
     })
