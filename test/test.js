@@ -18,7 +18,7 @@ chai.use(chaiHttp);
 let token;
 let userId;
 
-function tearDownDb() {
+function tearDownDb(TEST_DATABASE_URL) {
     return new Promise((resolve, reject) => {
         console.warn('Deleting database');
         mongoose.connection.dropDatabase()
@@ -46,13 +46,14 @@ function seedGoalData() {
 describe('goal API resource', function() {
     before(function() {
         console.log('running the server');
-        return runServer();
-
+        runServer();
+        seedGoalData();
+        return
 
     });
 
     beforeEach(function() {
-        return seedGoalData();
+        //return seedGoalData();
     });
 
     afterEach(function() {
@@ -62,10 +63,10 @@ describe('goal API resource', function() {
     });
 
     after(function() {
-        tearDownDb();
+        tearDownDb(TEST_DATABASE_URL);
         closeServer();
-        return 
-        
+        return
+
     });
 
     /*it('should return 200 status code with html', function() {
@@ -83,14 +84,14 @@ describe('goal API resource', function() {
         return chai.request(app)
             .post('/auth/register')
             .send({
-                name: 'Audrey',
-                email: 'audrey@audrey.com',
+                name: 'test',
+                email: 'test@test.com',
                 password: 'password'
             })
             .then(_res => {
                 res = _res;
                 res.should.have.status(200);
-                
+
 
             })
     });
@@ -100,36 +101,41 @@ describe('goal API resource', function() {
         return chai.request(app)
             .post('/auth/login')
             .send({
-                email: 'audrey@audrey.com',
+                email: 'test@test.com',
                 password: 'password'
             })
             .then(_res => {
                 res = _res;
                 res.should.have.status(200);
-                
+
                 token = res.body.data.token;
                 userId = res.body.data.userId;
-
+                console.log(userId);
             })
     });
 
-    
+
 
     it('should create a goal', function() {
         let res;
+        const newGoal = {
+            name: 'see a panda',
+            startDate: faker.date.recent(),
+            endDate: faker.date.future(),
+            user: userId
+          };
+
         return chai.request(app)
+
+
             .post('/goal/create')
             .set('Authorization', token)
-            .send({
-                name: 'see a panda',
-                startDate: faker.date.recent(),
-                endDate: faker.date.future(),
-                user: userId
-            })
+            .send(newGoal)
             .then(_res => {
                 res = _res;
                 res.should.have.status(200);
-                
+
+                console.log(newGoal);
 
             })
     });
@@ -148,16 +154,20 @@ describe('goal API resource', function() {
             .then(_res => {
                 res = _res;
                 res.should.have.status(200);
+                res.should.be.json;
+                res.body.should.be.a('object');
+                console.log(res.body);
                 // otherwise our db seeding didn't work
-                //res.body.should.have.length.of.at.least(1);
+                //res.body.data.should.have.length.of.at.least(1);
 
-                //return Goal.count();
+                //return goal.count();
+
             })
-            /*.then(count => {
-                // the number of returned posts should be same
-                // as number of posts in DB
-                res.body.should.have.length.of(count);
-            });*/
+        /*.then(count => {
+            // the number of returned posts should be same
+            // as number of posts in DB
+            res.body.should.have.length.of(count);
+        });*/
     });
 
 
