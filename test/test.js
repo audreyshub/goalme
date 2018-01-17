@@ -21,13 +21,13 @@ let userId;
 function tearDownDb(TEST_DATABASE_URL) {
     return new Promise((resolve, reject) => {
         console.warn('Deleting database');
-        mongoose.connection.dropDatabase()
+        mongoose.connection.dropDatabase(TEST_DATABASE_URL)
             .then(result => resolve(result))
             .catch(err => reject(err));
     });
 }
 
-function seedGoalData() {
+function seedGoalData(TEST_DATABASE_URL) {
     console.info('seeding goal data');
     const goalData = [];
     for (let i = 1; i <= 10; i++) {
@@ -47,7 +47,7 @@ describe('goal API resource', function() {
     before(function() {
         console.log('running the server');
         runServer();
-        seedGoalData();
+        seedGoalData(TEST_DATABASE_URL);
         return
 
     });
@@ -170,7 +170,30 @@ describe('goal API resource', function() {
         });*/
     });
 
+    it('should delete a post by id', function () {
 
+      let aGoal;
+
+      return goal
+        .findOne()
+        console.log(hello)
+        .then(_aGoal => {
+          aGoal = _aGoal;
+          
+          return chai.request(app).delete(`/goal/remove/${aGoal.id}`);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return goal.findById(aGoal.id);
+        })
+        .then(_aGoal => {
+          // when a variable's value is null, chaining `should`
+          // doesn't work. so `_post.should.be.null` would raise
+          // an error. `should.be.null(_post)` is how we can
+          // make assertions about a null value.
+          should.not.exist(_aGoal);
+        });
+    });
 
 
 
