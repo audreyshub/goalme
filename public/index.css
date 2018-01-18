@@ -1,6 +1,4 @@
-        @import url('https://fonts.googleapis.com/css?family=Kalam');
-
-    html {
+        html {
         box-sizing: border-box;
         font-family: 'Open Sans', sans-serif;
     }
@@ -81,11 +79,6 @@
     .goal-active {
         text-decoration: underline;
         color: #ff3889;
-
-        /*border: 2px solid gray;
-	border-radius: 50%;
-	width: 200px;
-	height: 200px;*/
     }
 
     .new-action {
@@ -114,8 +107,6 @@
         min-width: 40vw;
     }
 
-
-
     label {
         font-family: 'Kalam', cursive;
         font-weight: bold;
@@ -123,7 +114,6 @@
     }
 
     .seed {
-
         max-height: 8vh;
     }
 
@@ -158,7 +148,6 @@
     }
 
     .seed:hover {
-
         cursor: pointer;
     }
 
@@ -210,7 +199,6 @@
     }
 
     .garden h2 {
-
         max-width: 60vw;
         margin: 0;
         text-align: center;
@@ -240,7 +228,6 @@
     }
 
     .action-seed-shake {
-
         /* Start the shake animation and make the animation last for 0.5 seconds */
         animation: shake 0.5s;
         /* When the animation is finished, start again */
@@ -260,7 +247,6 @@
         color: #ff3889;
     }
 
-
     .login,
     .signup {
         display: flex;
@@ -278,8 +264,8 @@
     #logoutBtn {
         display: none;
     }
-    /* The Modal (background) */
 
+    /* The Modal (background) */
     .modal {
         display: none;
 
@@ -301,8 +287,8 @@
         background-color: rgba(0, 0, 0, 0.4);
         /* Black w/ opacity */
     }
+ 
     /* Modal Content/Box */
-
     .modal-content {
         background-color: #fefefe;
         margin: 15% auto;
@@ -312,8 +298,8 @@
         width: 74%;
         border-radius: 3%;
     }
+ 
     /* The Close Button */
-
     .login-close,
     .signup-close {
         color: #aaa;
@@ -331,7 +317,6 @@
         cursor: pointer;
     }
 
-
     .login-submit:hover,
     .signup-submit:hover,
     .login-submit:focus,
@@ -340,7 +325,6 @@
     .goal-submit:focus,
     .action-submit:hover,
     .action-submit:focus {
-
         text-decoration: none;
         cursor: pointer;
         opacity: 0.75
@@ -358,7 +342,6 @@
     .button-link:hover {
         color: black;
     }
-    /*JON's styles*/
 
     input {
         padding: 10px;
@@ -372,8 +355,6 @@
 
     input[type="submit"],
     .demo {
-        /*background: #383B53;
-    color: #DCEED1;*/
         background: #ff3889;
         border-radius: 2px;
         width: 100%;
@@ -397,8 +378,6 @@
         font-weight: bold;
     }
 
-
-
     input:focus,
     input:focus {
         border: 2px solid #2f2f2f;
@@ -411,13 +390,6 @@
         font-size: 35px;
         margin-bottom: 5px;
     }
-
-
-
-
-
-
-
 
     @keyframes float {
         0% {
@@ -439,10 +411,9 @@
         border: 2px solid black;
         padding: 5px 10px;
     }
+
     /*when screen gets larger than 420px*/
-
     @media only screen and (min-width: 420px) {
-
         .actions {
             width: 75%;
         }
@@ -453,18 +424,13 @@
     }
 
     @media only screen and (min-width: 490px) {
-
-
-
         .list-goals,
         .my-goals,
         .my-goals-demo {
             flex-direction: row;
         }
 
-
         @media only screen and (min-width: 800px) {
-
             .actions {
                 width: 55%;
             }
@@ -475,6 +441,9 @@
         }
 
         @media only screen and (min-width: 1000px) {
+            body {
+                margin: 30px;
+            }
 
             .actions {
                 width: 35%;
@@ -490,9 +459,6 @@
         }
 
         @media only screen and (min-width: 1300px) {
-
-
-
             .modal-content {
                 width: 22%;
             }

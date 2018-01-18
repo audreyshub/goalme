@@ -21,7 +21,7 @@ let userId;
 function tearDownDb(TEST_DATABASE_URL) {
     return new Promise((resolve, reject) => {
         console.warn('Deleting database');
-        mongoose.connection.dropDatabase(TEST_DATABASE_URL)
+        mongoose.connection.dropDatabase()
             .then(result => resolve(result))
             .catch(err => reject(err));
     });
@@ -44,49 +44,30 @@ function seedGoalData(TEST_DATABASE_URL) {
 }
 
 describe('goal API resource', function() {
+
     before(function() {
         console.log('running the server');
         runServer();
-        seedGoalData(TEST_DATABASE_URL);
+        //seedGoalData(TEST_DATABASE_URL);
         return
-
-    });
-
-    beforeEach(function() {
-        //return seedGoalData();
-    });
-
-    afterEach(function() {
-        // tear down database so we ensure no state from this test
-        // effects any coming after.
 
     });
 
     after(function() {
-        tearDownDb(TEST_DATABASE_URL);
+        
         closeServer();
         return
 
     });
-
-    /*it('should return 200 status code with html', function() {
-        return chai.request(app)
-            .get('/index.html')
-            .then(function(res) {
-                res.should.have.status(200);
-                res.should.be.html;
-
-            });
-    });*/
 
     it('should register and return user', function() {
         let res;
         return chai.request(app)
             .post('/auth/register')
             .send({
-                name: 'test',
-                email: 'test@test.com',
-                password: 'password'
+                name: faker.name.firstName(),
+                email: faker.internet.email(),
+                password: faker.lorem.words()
             })
             .then(_res => {
                 res = _res;
@@ -113,8 +94,6 @@ describe('goal API resource', function() {
                 console.log(userId);
             })
     });
-
-
 
     it('should create a goal', function() {
         let res;
@@ -194,7 +173,5 @@ describe('goal API resource', function() {
           should.not.exist(_aGoal);
         });
     });
-
-
 
 });

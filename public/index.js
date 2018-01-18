@@ -99,10 +99,6 @@ function createGoal() {
             },
             error: function(error) {}
         });
-
-
-        //TODO validate dates
-        //TODO call the API
     })
 };
 
@@ -290,9 +286,9 @@ function submitAction() {
 
 
                 setTimeout(() => {
-                	let goal = data.data
+                    let goal = data.data
                     let imageUrl;
-                    
+
                     if ($('.single-action').length < germinationImages.length) {
                         imageUrl = `images/${germinationImages[goal.actions.length+1]}`;
                     } else {
@@ -307,7 +303,7 @@ function submitAction() {
 
             },
             error: function(error) {
-            	
+
                 swal("Oh no!", error.responseJSON.message, "error");
             }
         });
@@ -416,10 +412,10 @@ function logOut() {
 };
 
 function backToHomepage() {
-	$('body').on('click', '#back-button', (event) => {
-		console.log('back button clicked');
-		$('.back').hide();
-		$('.masthead').show();
+    $('body').on('click', '#back-button', (event) => {
+        console.log('back button clicked');
+        $('.back').hide();
+        $('.masthead').show();
         $('#logoutBtn').hide();
         $('#loginBtn').show();
         $('#signinBtn').show();
@@ -427,7 +423,7 @@ function backToHomepage() {
         $('.garden').hide();
         $('.left-navbar').hide();
         $('.create-goal').hide();
-	})
+    })
 };
 
 function signUp() {
@@ -481,7 +477,6 @@ span.onclick = function() {
     loginmodal.style.display = "none";
 };
 
-
 // Get the modal
 const signupmodal = document.getElementById('signupModal');
 
@@ -508,7 +503,6 @@ window.onclick = function(event) {
         loginmodal.style.display = "none";
     }
 };
-
 
 function demoClick() {
     $('.demo').click(event => {

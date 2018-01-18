@@ -18,8 +18,11 @@ router.use(function(req, res, next) {
 });
 
 router.use(function(req, res, next) {
-    if (req.method === 'OPTIONS') { res.writeHead(200);
-        res.end(); return; }
+    if (req.method === 'OPTIONS') {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
     //get token from header or body
     const token = req.headers.authorization || req.body.token;
     if (!token) {
@@ -52,7 +55,7 @@ router.route('/create')
         newGoal.name = req.body.name;
         newGoal.startDate = req.body.startDate;
         newGoal.endDate = req.body.endDate;
-        newGoal.user =  req.body.userId;
+        newGoal.user = req.body.userId;
         newGoal
             .save()
             .then((savedGoal) => {
@@ -71,7 +74,7 @@ router.route('/create')
 router.route('/all/:userId')
     .get((req, res) => {
         console.log("under all/userid")
-        goalModel.find({user: req.params.userId})
+        goalModel.find({ user: req.params.userId })
             .then((goals) => {
                 res.status(200).json({
                     message: 'Here are your goals',
@@ -175,9 +178,5 @@ router.route('/addaction/:id')
             });
 
     })
-
-
-
-
 
 module.exports = router;

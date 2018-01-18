@@ -62,6 +62,7 @@ function runServer() {
     return new Promise((resolve, reject) => {
         mongoose.connect(config.TEST_DATABASE_URL, { useMongoClient: true });
         let db = mongoose.connection;
+        
         db.on('error', err => {
             mongoose.disconnect();
             reject(err);
