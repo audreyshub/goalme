@@ -5,13 +5,13 @@ const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const config = require('../config');
+//const config = require('../config');
 
 const should = chai.should();
 
-const goal = require('../models/goals-model');
+const  goal  = require('../models/goals-model');
 const { closeServer, runServer, app } = require('../server');
-const TEST_DATABASE_URL = config.TEST_DATABASE_URL;
+const  { TEST_DATABASE_URL }   = require('../config');
 
 chai.use(chaiHttp);
 
@@ -47,7 +47,7 @@ describe('goal API resource', function() {
 
     before(function() {
         console.log('running the server');
-        runServer();
+        runServer(TEST_DATABASE_URL);
         //seedGoalData(TEST_DATABASE_URL);
         return
 

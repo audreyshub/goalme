@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const config = require('../config');
+const SECRET = require('../config');
 
 
 const usersModel = require('../models/users-model');
@@ -82,7 +83,7 @@ router.route('/login')
                     email: user.email,
                     name: user.name
                 }
-                const token = jwt.sign(tokenUser, config.secret);
+                const token = jwt.sign(tokenUser, SECRET);
                 res.status(200).json({
                     message: 'User logged in successfully',
                     data: {"token": token, "userId": user._id}

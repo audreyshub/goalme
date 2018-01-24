@@ -10,17 +10,18 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+
 //Route files
 //const itemRoutes = require('./routes/item-routes'); //Routes step 3.- Require the routes for each file
 const goalRoutes = require('./routes/goal-routes');
 const authRoutes = require('./routes/auth-routes');
 
-const config = require('./config');
+const { DATABASE_URL, PORT } = require('./config');
 
 const app = express(); //we create the server inside the app variable
-const port = process.env.PORT || config.localPort; //specify the port
+//const port = process.env.PORT || config.localPort; //specify the port
 
-const db = mongoose.connection;
+
 
 //Some configurations
 app.use(morgan('common')); //use morgan to log
@@ -35,20 +36,20 @@ app.get("/", (request, response) => {
 
 
 //Database config
-mongoose.connect(config.databaseUrl, { useMongoClient: true });
-db.on('error', console.error.bind(console, 'Connection error:'));
+/*db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', () => {
     console.log('Connected to a database')
-});
+});*/
 
 app.all('/');
 app.use('/goal', goalRoutes);
 app.use('/auth', authRoutes);
 
 //start our server. This means that the server will be listening to all the requests
+/*
 app.listen(port, () => {
     console.log(config.serverRunningMessage + config.localPort);
-});
+});*/
 
 // closeServer needs access to a server object, but that only
 // gets created when `runServer` runs, so we declare `server` here
@@ -60,7 +61,7 @@ let server;
 function runServer() {
 
     return new Promise((resolve, reject) => {
-        mongoose.connect(config.TEST_DATABASE_URL, { useMongoClient: true });
+        mongoose.connect(DATABASE_URL, { useMongoClient: true });
         let db = mongoose.connection;
         
         db.on('error', err => {
@@ -69,10 +70,10 @@ function runServer() {
             console.log(`server connection error: ${err}`);
         });
         db.once('open', () => {
-            console.log(`connected to database: ${config.TEST_DATABASE_URL}`);
+            console.log(`connected to database: ${DATABASE_URL}`);
         });
-        server = app.listen(config.testingPort, () => {
-            console.log(`your server is running on port: ${config.testingPort}`);
+        server = app.listen(Port, () => {
+            console.log(`your server is running on port: ${Port}`);
             resolve();
         });
     });
