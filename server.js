@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 //const itemRoutes = require('./routes/item-routes'); //Routes step 3.- Require the routes for each file
 const goalRoutes = require('./routes/goal-routes');
 const authRoutes = require('./routes/auth-routes');
+const demoRoutes = require('./routes/demo-routes');
 
 const config = require('./config');
 
@@ -44,6 +45,7 @@ db.once('open', () => {
 app.all('/');
 app.use('/goal', goalRoutes);
 app.use('/auth', authRoutes);
+app.use('/demo', demoRoutes);
 
 //start our server. This means that the server will be listening to all the requests
 app.listen(port, () => {
@@ -100,9 +102,10 @@ function closeServer() {
 
 // if server.js is called directly (aka, with `node server.js`), this block
 // runs. but we also export the runServer command so other code (for instance, test code) can start the server as needed.
+/*
 if (require.main === module) {
     runServer().catch(err => console.error(err));
-};
+};*/
 
 module.exports = { app, runServer, closeServer };
 

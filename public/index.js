@@ -1,13 +1,13 @@
 const germinationImages = ['seed-glasses.png', 'germination.png', 'water.png', 'plant.png', '3leafplant.png'];
 const flowerImages = ['flower2.png', 'flowers.png', 'flowerbluepot.png', 'redleafplant.png', '3redflower.png', 'happyplant.png', 'palm-tree.png'];
 
-//const baseURL = "http://localhost:3232/";
-const baseURL = "https://rocky-island-77568.herokuapp.com/";
+const baseURL = "http://localhost:3332/";
+//const baseURL = "https://rocky-island-77568.herokuapp.com/";
 
 function checkUserLogin() {
     if (localStorage.getItem('token')) {
         console.log('user is logged in');
-
+        $('.how-to').show();
         $('.masthead').hide();
         $('.list-goals').show();
         $('.garden').show();
@@ -20,6 +20,7 @@ function checkUserLogin() {
         displayGoals();
     } else {
         console.log('user is NOT logged in');
+        $('.how-to').hide();
         $('.back').hide();
         $('.masthead').show();
         $('.list-goals').hide();
@@ -107,12 +108,12 @@ function renderGoalsDemo(goals) {
     $('.back').show();
     goals.forEach((goal) => {
         $('.list-goals').append(`
-                	
-                	<div class="my-goals-demo" value="${goal.name}">
-                	<img class="seed" value="${goal._id}" src="images/germination.png">
-                	<p value="${goal._id}">${goal.name}</p>
+                    
+                    <div class="my-goals-demo" value="${goal.name}">
+                    <img class="seed" value="${goal._id}" src="images/germination.png">
+                    <p value="${goal._id}">${goal.name}</p>
 
-                	</div>`);
+                    </div>`);
     })
     $('.garden').html(`<h2>Thanks for visiting our demo version!</h2><br><p class="demo-p">Click on a goal above to demo Goalme!</p><br><p class="demo-p">Please note, actions can not be saved or deleted.</p><img class="action-seed" src="images/seed-glasses.png">`);
 
@@ -122,12 +123,12 @@ function renderGoals(goals) {
     $('.list-goals').html(`<h2>Goals:</h2>`);
     goals.forEach((goal) => {
         $('.list-goals').append(`
-                	
-                	<div class="my-goals" value="${goal.name}">
-                	<img class="seed" value="${goal._id}" src="images/germination.png">
-                	<p value="${goal._id}">${goal.name}</p>
+                    
+                    <div class="my-goals" value="${goal.name}">
+                    <img class="seed" value="${goal._id}" src="images/germination.png">
+                    <p value="${goal._id}">${goal.name}</p>
 
-                	</div>`);
+                    </div>`);
     })
     $('.garden').html(`<h2>Click on a goal to enter actions or click Create Goals to create a goal!</h2><img class="action-seed" src="images/seed-glasses.png">`);
 
@@ -145,9 +146,9 @@ function displayGoals(isDemo) {
 
             $('.garden').html(`<h2>Enter actions:</h2>`);
             $('.garden').append(`<div>
-                                <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
+                                <input type="text" class="new-action" name="action" placeholder="Enter an action here..." required/>
                                 <input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}">
-                             	<input type="submit" class="action-submit" name="submit" value="Submit action" disabled>
+                                <input type="submit" class="action-submit" name="submit" value="Submit action" disabled>
                              </div>`);
             let goal = demoAccount[0];
             let imageUrl;
@@ -198,7 +199,7 @@ function displaySelectedGoalDemo() {
         $('.garden').html(`<i class="fa fa-times fa-2x delete" aria-hidden="true" title="Delete goal"></i>`);
         $('.garden').append(`<h2>Enter actions:</h2>`);
         $('.garden').append(`<div>
-                                <input type="text" class="new-action" name="action" placeholder="walked 20 minutes" required/>
+                                <input type="text" class="new-action" name="action" placeholder="Enter an action here..." required/>
                                 <input type="hidden" class="hidden-id" name="id" value="${event.target.attributes.value.nodeValue}">
                              </div>`);
         $('.garden').append(`<div><input type="submit" class="action-submit" name="submit" value="Submit action"></div>`);
@@ -379,6 +380,7 @@ function logIn() {
 
 
                 displayGoals(false);
+                $('.how-to').show();
                 $('.back').hide();
                 $('.masthead').hide();
                 $('#loginBtn').hide();
@@ -399,7 +401,7 @@ function logIn() {
 function logOut() {
     $('#logoutBtn').click(event => {
         localStorage.clear();
-
+        $('.how-to').hide();
         $('.masthead').show();
         $('#logoutBtn').hide();
         $('#loginBtn').show();

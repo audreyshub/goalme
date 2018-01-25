@@ -43,11 +43,19 @@
     }
 
     .fa-arrow-left {
-        padding-right: 4px;
+        margin-right: 4px;
+        color: #ff3889;
     }
 
     #back-button {
         color: #ff3889;
+    }
+
+    .back-demo a {
+        color: #ff3889;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
     }
 
     .navbar {
@@ -92,19 +100,20 @@
         margin-top: 15px;
     }
 
-    .create-goal {
+    .create-goal, .demo-create-goal {
         display: flex;
         flex-direction: column;
         border: 3px solid black;
         justify-content: center;
         align-items: center;
         min-height: 60vh;
+
         margin-top: 70px;
     }
 
     .create-goal div {
         margin: 10px;
-        min-width: 40vw;
+        min-width: 22vw;
     }
 
     label {
@@ -378,9 +387,20 @@
         font-weight: bold;
     }
 
+    .demo-goal-submit, .view-demo {
+        margin-top: 17px;
+
+    }
+
     input:focus,
     input:focus {
         border: 2px solid #2f2f2f;
+    }
+
+    .how-to {
+        font-family: 'VT323', monospace;
+        color: #555;
+        font-size: 21px;
     }
 
     h1,

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Goals Project</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Kalam|Bowlby+One|Open+Sans|VT323" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<div>
+        <p class="logo">Goalme! (demo-version)</p>
+    </div>
+    <div class="back-demo">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i><a href="index.html" target="blank">Take me back to the homepage</a>
+        
+    </div>
+    <div class="how-to">
+    	<p>Thanks for visiting the demo version!</p>
+    	<ul>
+    		<li>CREATE a goal by entering the name of the goal (start and end dates are optional) and click on the 'Create goal' button</li>
+    		<li>Select a goal under the 'Goals' section</li>
+    		<li>Enter an action for selected goal and click 'Submit action'</li>
+    		<li>Each action submitted will trigger an animation</li>
+    		<li>To DELETE a goal select goal and click on the X button</li>
+    	</ul>
+    	
+    </div>
+    <form class="demo-create-goal">
+        <div>
+            <label for="name">Enter goal* </label>
+            <br>
+            <input type="text" name="goal" placeholder="Enter your goal here" required/>
+        </div>
+        <div>
+            <label for="start-date">Start date </label>
+            <br>
+            <input type="date" name="start-date" placeholder="Start date">
+        </div>
+        <div>
+            <label for="end-date">End date </label>
+            <br>
+            <input type="date" name="end-date" placeholder="End date">
+        </div>
+        <div>
+            <input type="submit" class="goal-submit demo-goal-submit" value="Create goal" name="submit">
+        </div>
+    </form>
+    <div class="list-goals">
+    </div>
+    <div class="garden">
+    </div>
+    <!--Modals-->
+    <div id="loginModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="login-close">&times;</span>
+            <h2>Log in</h2>
+            <form class="login">
+                <div>
+                    <input type="email" name="email" class="email" placeholder="Email" required/>
+                </div>
+                <div>
+                    <input type="password" name="password" class="password" placeholder="Password" required/>
+                </div>
+                <div>
+                    <input type="submit" class="login-submit" value="Login" name="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/f69011a5ea.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="demo-index.js"></script>
+</body>
+
+</html>

@@ -30,15 +30,26 @@
         <p class="masthead-intro">a full stack NODE Express app built with <i class="fa fa-heart" aria-hidden="true"></i> by AUDREY WONG.</p>
         <br>
         <p class="masthead-intro">You can use this app to track goals and watch a garden grow as you take actions towards your goals.</p>
-        <p class="masthead-intro">
-            <button class="demo">View demo</button>
+        <p class="masthead-intro view-demo">
+            <a href="demo-index.html" target="blank" class="demo">View demo</a>
         </p>
+    </div>
+    <div class="how-to">
+        <p>How to use:</p>
+        <ul>
+            <li>To CREATE a goal click on 'Create goals' and enter the name of the goal (start and end dates are optional) then click on the 'Create goal' button</li>
+            <li>Click on 'My Goals' and select a goal under the 'Goals' section</li>
+            <li>Enter an action for selected goal and click 'Submit action'</li>
+            <li>Each action submitted will trigger an animation</li>
+            <li>To DELETE a goal select goal and click on the X button</li>
+        </ul>
+        
     </div>
     <form class="create-goal">
         <div>
             <label for="name">Enter goal* </label>
             <br>
-            <input type="text" name="goal" placeholder="Exercise daily" required/>
+            <input type="text" name="goal" placeholder="Enter your goal here" required/>
         </div>
         <div>
             <label for="start-date">Start date </label>
