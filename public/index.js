@@ -130,7 +130,7 @@ function renderGoals(goals) {
 
                     </div>`);
     })
-    $('.garden').html(`<h2>Click on a goal to enter actions or click Create Goals to create a goal!</h2><img class="action-seed" src="images/seed-glasses.png">`);
+    $('.garden').html(`<h2>Click on a goal to enter actions!</h2><img class="action-seed" src="images/seed-glasses.png">`);
 
 }
 

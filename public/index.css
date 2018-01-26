@@ -1,485 +1,489 @@
-        html {
-        box-sizing: border-box;
-        font-family: 'Open Sans', sans-serif;
-    }
-
-    .logo {
-        font-family: 'Bowlby One', cursive;
-        font-size: 20px;
-    }
-
-    .masthead-heading,
-    .masthead-intro {
-        padding: 2px 20px;
-        text-align: center;
-        color: black;
-    }
-
-    .masthead {
-        padding: 13em 0;
-        background-image: url('https://openclipart.org/download/99229/a-paisaje-boceto.svg');
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-
-    .masthead-intro {
-        margin-bottom: 0.1em;
-        font-weight: bold;
-        font-family: 'Kalam', cursive;
-        font-size: 20px;
-        color: #000000b8;
-        text-align: center;
-        max-width: 85%;
-        margin: auto;
-    }
-
-    .masthead-heading {
-        margin-top: -0.1em;
-        font-family: 'Bowlby One', cursive;
-    }
-
-    .fa-heart {
-        color: red;
-    }
-
-    .fa-arrow-left {
-        margin-right: 4px;
-        color: #ff3889;
-    }
-
-    #back-button {
-        color: #ff3889;
-    }
-
-    .back-demo a {
-        color: #ff3889;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: flex-end;
-        margin: 10px;
-    }
-
-    .navbar button {
-        margin-left: 10px;
-        font-size: 12px;
-        background: none;
-        outline: none;
-        border: 1px solid black;
-        padding: 5px 13px;
-        color: #00000096;
-        font-weight: bold;
-    }
-
-    .navbar button:hover {
-        cursor: pointer;
-        color: black;
-    }
-
-    .navbar-active {
-        text-decoration: underline;
-    }
-
-    .goal-active {
-        text-decoration: underline;
-        color: #ff3889;
-    }
-
-    .new-action {
-        width: 40vw;
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .action-submit {
-        width: 40vw;
-        margin-top: 15px;
-    }
-
-    .create-goal, .demo-create-goal {
-        display: flex;
-        flex-direction: column;
-        border: 3px solid black;
-        justify-content: center;
-        align-items: center;
-        min-height: 60vh;
-
-        margin-top: 70px;
-    }
-
-    .create-goal div {
-        margin: 10px;
-        min-width: 22vw;
-    }
-
-    label {
-        font-family: 'Kalam', cursive;
-        font-weight: bold;
-        font-size: 21px;
-    }
-
-    .seed {
-        max-height: 8vh;
-    }
-
-    h2 {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .list-goals h2 {
-        margin: 30px 1000px;
-        margin-top: 40px;
-        text-decoration: underline;
-    }
-
-    .list-goals,
-    .my-goals,
-    .my-goals-demo {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        font-weight: bold;
-        margin: 10px;
-    }
-
-    .my-goals:hover {
-        cursor: pointer;
-        text-decoration: underline;
-    }
-
-    .seed:hover {
-        cursor: pointer;
-    }
-
-    @keyframes shake {
-        0% {
-            transform: translate(1px, 1px) rotate(0deg);
-        }
-        10% {
-            transform: translate(-1px, -2px) rotate(-1deg);
-        }
-        20% {
-            transform: translate(-3px, 0px) rotate(1deg);
-        }
-        30% {
-            transform: translate(3px, 2px) rotate(0deg);
-        }
-        40% {
-            transform: translate(1px, -1px) rotate(1deg);
-        }
-        50% {
-            transform: translate(-1px, 2px) rotate(-1deg);
-        }
-        60% {
-            transform: translate(-3px, 1px) rotate(0deg);
-        }
-        70% {
-            transform: translate(3px, 1px) rotate(-1deg);
-        }
-        80% {
-            transform: translate(-1px, -1px) rotate(1deg);
-        }
-        90% {
-            transform: translate(1px, 2px) rotate(0deg);
-        }
-        100% {
-            transform: translate(1px, -2px) rotate(-1deg);
-        }
-    }
-
-    .garden {
-        display: flex;
-        flex-direction: column;
-        border: 3px solid black;
-        justify-content: center;
-        align-items: center;
-        min-height: 80vh;
-        min-width: 90vw;
-        margin-top: 60px;
-    }
-
-    .garden h2 {
-        max-width: 60vw;
-        margin: 0;
-        text-align: center;
-    }
-
-    .demo-p {
-        max-width: 53vw;
-        margin: 0;
-        text-align: center;
-    }
-
-    .action-seed {
-        align-items: flex-end;
-        max-width: 15vh;
-        animation: float 6s ease-in-out infinite;
-        margin-top: 30px;
-    }
-
-    .action-plant {
-        align-items: flex-end;
-        max-width: 10vh;
-    }
-
-    .action-plant-2 {
-        align-items: flex-end;
-        max-width: 20vh;
-    }
-
-    .action-seed-shake {
-        /* Start the shake animation and make the animation last for 0.5 seconds */
-        animation: shake 0.5s;
-        /* When the animation is finished, start again */
-        animation-iteration-count: infinite;
-    }
-
-    .delete {
-        padding: 9px;
-        font-size: 12px;
-        color: #aaa;
-        margin-top: 5vh;
-        font-size: 12px;
-        cursor: pointer;
-    }
-
-    .delete:hover {
-        color: #ff3889;
-    }
-
-    .login,
-    .signup {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .login div,
-    .signup div {
-        margin: 10px;
-        width: 100%;
-    }
-
-    #logoutBtn {
-        display: none;
-    }
-
-    /* The Modal (background) */
-    .modal {
-        display: none;
-
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 1;
-        /* Sit on top */
-        left: 0;
-        top: 0;
-        width: 100%;
-        /* Full width */
-        height: 100%;
-        /* Full height */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: rgb(0, 0, 0);
-        /* Fallback color */
-        background-color: rgba(0, 0, 0, 0.4);
-        /* Black w/ opacity */
-    }
- 
-    /* Modal Content/Box */
-    .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 5px solid #373750;
-        box-sizing: border-box;
-        width: 74%;
-        border-radius: 3%;
-    }
- 
-    /* The Close Button */
-    .login-close,
-    .signup-close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .login-close:hover,
-    .signup-close:hover,
-    .login-close:focus,
-    .signup-close:focus {
-        color: #ff3889;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .login-submit:hover,
-    .signup-submit:hover,
-    .login-submit:focus,
-    .signup-submit:focus,
-    .goal-submit:hover,
-    .goal-submit:focus,
-    .action-submit:hover,
-    .action-submit:focus {
-        text-decoration: none;
-        cursor: pointer;
-        opacity: 0.75
-    }
-
-    .button-link {
-        background: none;
-        border: none;
-        cursor: pointer;
-        float: left;
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-    .button-link:hover {
-        color: black;
-    }
-
-    input {
-        padding: 10px;
-        transition: all 0.3s ease-in;
-        outline: none;
-        width: 100%;
-        box-sizing: border-box;
-        font-size: 13px;
-        border: 1px solid grey;
-    }
-
-    input[type="submit"],
-    .demo {
-        background: #ff3889;
-        border-radius: 2px;
-        width: 100%;
-        border: none;
-        padding: 13px;
-        font-size: 15px;
-        cursor: pointer;
-        color: white;
-        opacity: 2.00;
-    }
-
-    .demo:hover,
-    .demo:focus {
-        opacity: 0.75;
-    }
-
-    .demo {
-        margin-top: 10px;
-        text-align: center;
-        width: 35%;
-        font-weight: bold;
-    }
-
-    .demo-goal-submit, .view-demo {
-        margin-top: 17px;
-
-    }
-
-    input:focus,
-    input:focus {
-        border: 2px solid #2f2f2f;
-    }
-
-    .how-to {
-        font-family: 'VT323', monospace;
-        color: #555;
-        font-size: 21px;
-    }
-
-    h1,
-    h2,
-    h3 {
-        font-family: 'Kalam', cursive;
-        font-size: 35px;
-        margin-bottom: 5px;
-    }
-
-    @keyframes float {
-        0% {
-            transform: translatey(0px);
-        }
-        50% {
-            transform: translatey(-20px);
-        }
-        100% {
-            transform: translatey(0px);
-        }
-    }
-
-    .actions {
-        width: 90%;
-    }
-
-    .single-action {
-        border: 2px solid black;
-        padding: 5px 10px;
-    }
-
-    /*when screen gets larger than 420px*/
-    @media only screen and (min-width: 420px) {
-        .actions {
-            width: 75%;
+                html {
+            box-sizing: border-box;
+            font-family: 'Open Sans', sans-serif;
         }
 
-        .modal-content {
-            width: 55%;
+        .logo {
+            font-family: 'Bowlby One', cursive;
+            font-size: 20px;
         }
-    }
 
-    @media only screen and (min-width: 490px) {
+        .masthead-heading,
+        .masthead-intro {
+            padding: 2px 20px;
+            text-align: center;
+            color: black;
+        }
+
+        .masthead {
+            padding: 13em 0;
+            background-image: url('./images/landscape.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .masthead-intro {
+            margin-bottom: 0.1em;
+            font-weight: bold;
+            font-family: 'Kalam', cursive;
+            font-size: 20px;
+            color: #000000b8;
+            text-align: center;
+            max-width: 85%;
+            margin: auto;
+        }
+
+        .masthead-heading {
+            margin-top: -0.1em;
+            font-family: 'Bowlby One', cursive;
+        }
+
+        .fa-heart {
+            color: red;
+        }
+
+        .fa-arrow-left {
+            margin-right: 4px;
+            color: #ff3889;
+        }
+
+        #back-button {
+            color: #ff3889;
+        }
+
+        .back-demo a {
+            color: #ff3889;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            margin: 10px;
+        }
+
+        .navbar button {
+            margin-left: 10px;
+            font-size: 12px;
+            background: none;
+            outline: none;
+            border: 1px solid black;
+            padding: 5px 13px;
+            color: #00000096;
+            font-weight: bold;
+        }
+
+        .navbar button:hover {
+            cursor: pointer;
+            color: black;
+        }
+
+        .navbar-active {
+            text-decoration: underline;
+        }
+
+        .goal-active {
+            text-decoration: underline;
+            color: #ff3889;
+        }
+
+        .new-action {
+            width: 40vw;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        .action-submit {
+            width: 40vw;
+            margin-top: 15px;
+        }
+
+        .create-goal,
+        .demo-create-goal {
+            display: flex;
+            flex-direction: column;
+            border: 3px solid black;
+            justify-content: center;
+            align-items: center;
+            min-height: 60vh;
+
+            margin-top: 70px;
+        }
+
+        .create-goal div {
+            margin: 10px;
+            min-width: 22vw;
+        }
+
+        label {
+            font-family: 'Kalam', cursive;
+            font-weight: bold;
+            font-size: 21px;
+        }
+
+        .seed {
+            max-height: 8vh;
+        }
+
+        h2 {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .list-goals h2 {
+            margin: 30px 1000px;
+            margin-top: 40px;
+            text-decoration: underline;
+        }
+
         .list-goals,
         .my-goals,
         .my-goals-demo {
-            flex-direction: row;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            font-weight: bold;
+            margin: 10px;
         }
 
-        @media only screen and (min-width: 800px) {
+        .my-goals:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .seed:hover {
+            cursor: pointer;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(1px, 1px) rotate(0deg);
+            }
+            10% {
+                transform: translate(-1px, -2px) rotate(-1deg);
+            }
+            20% {
+                transform: translate(-3px, 0px) rotate(1deg);
+            }
+            30% {
+                transform: translate(3px, 2px) rotate(0deg);
+            }
+            40% {
+                transform: translate(1px, -1px) rotate(1deg);
+            }
+            50% {
+                transform: translate(-1px, 2px) rotate(-1deg);
+            }
+            60% {
+                transform: translate(-3px, 1px) rotate(0deg);
+            }
+            70% {
+                transform: translate(3px, 1px) rotate(-1deg);
+            }
+            80% {
+                transform: translate(-1px, -1px) rotate(1deg);
+            }
+            90% {
+                transform: translate(1px, 2px) rotate(0deg);
+            }
+            100% {
+                transform: translate(1px, -2px) rotate(-1deg);
+            }
+        }
+
+        .garden {
+            display: flex;
+            flex-direction: column;
+            border: 3px solid black;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            min-width: 90vw;
+            margin-top: 60px;
+        }
+
+        .garden h2 {
+            max-width: 60vw;
+            margin: 0;
+            text-align: center;
+        }
+
+        .demo-p {
+            max-width: 53vw;
+            margin: 0;
+            text-align: center;
+        }
+
+        .action-seed {
+            align-items: flex-end;
+            max-width: 15vh;
+            animation: float 6s ease-in-out infinite;
+            margin-top: 30px;
+        }
+
+        .action-plant {
+            align-items: flex-end;
+            max-width: 10vh;
+        }
+
+        .action-plant-2 {
+            align-items: flex-end;
+            max-width: 20vh;
+        }
+
+        .action-seed-shake {
+            /* Start the shake animation and make the animation last for 0.5 seconds */
+            animation: shake 0.5s;
+            /* When the animation is finished, start again */
+            animation-iteration-count: infinite;
+        }
+
+        .delete {
+            padding: 9px;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 5vh;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .delete:hover {
+            color: #ff3889;
+        }
+
+        .login,
+        .signup {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login div,
+        .signup div {
+            margin: 10px;
+            width: 100%;
+        }
+
+        #logoutBtn {
+            display: none;
+        }
+        /* The Modal (background) */
+
+        .modal {
+            display: none;
+
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+        /* Modal Content/Box */
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 5px solid #373750;
+            box-sizing: border-box;
+            width: 74%;
+            border-radius: 3%;
+        }
+        /* The Close Button */
+
+        .login-close,
+        .signup-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .login-close:hover,
+        .signup-close:hover,
+        .login-close:focus,
+        .signup-close:focus {
+            color: #ff3889;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .login-submit:hover,
+        .signup-submit:hover,
+        .login-submit:focus,
+        .signup-submit:focus,
+        .goal-submit:hover,
+        .goal-submit:focus,
+        .action-submit:hover,
+        .action-submit:focus {
+            text-decoration: none;
+            cursor: pointer;
+            opacity: 0.75
+        }
+
+        .button-link {
+            background: none;
+            border: none;
+            cursor: pointer;
+            float: left;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .button-link:hover {
+            color: black;
+        }
+
+        input {
+            padding: 10px;
+            transition: all 0.3s ease-in;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 13px;
+            border: 1px solid grey;
+        }
+
+        input[type="submit"],
+        .demo {
+            background: #ff3889;
+            border-radius: 2px;
+            width: 100%;
+            border: none;
+            padding: 13px;
+            font-size: 15px;
+            cursor: pointer;
+            color: white;
+            opacity: 2.00;
+        }
+
+        .demo:hover,
+        .demo:focus {
+            opacity: 0.75;
+        }
+
+        .demo {
+            margin-top: 10px;
+            text-align: center;
+            width: 35%;
+            font-weight: bold;
+        }
+
+        .demo-goal-submit,
+        .view-demo {
+            margin-top: 17px;
+        }
+
+        input:focus,
+        input:focus {
+            border: 2px solid #2f2f2f;
+        }
+
+        .how-to {
+            font-family: 'VT323', monospace;
+            color: #555;
+            font-size: 1.3em;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Kalam', cursive;
+            font-size: 35px;
+            margin-bottom: 5px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translatey(0px);
+            }
+            50% {
+                transform: translatey(-20px);
+            }
+            100% {
+                transform: translatey(0px);
+            }
+        }
+
+        .actions {
+            width: 90%;
+        }
+
+        .single-action {
+            border: 2px solid black;
+            padding: 5px 10px;
+        }
+        /*when screen gets larger than 420px*/
+
+        @media only screen and (min-width: 420px) {
             .actions {
+                width: 75%;
+            }
+
+            .modal-content {
                 width: 55%;
             }
-
-            .modal-content {
-                width: 35%;
-            }
         }
 
-        @media only screen and (min-width: 1000px) {
-            body {
-                margin: 30px;
+        @media only screen and (min-width: 490px) {
+            .list-goals,
+            .my-goals,
+            .my-goals-demo {
+                flex-direction: row;
             }
 
-            .actions {
-                width: 35%;
+            @media only screen and (min-width: 800px) {
+                .actions {
+                    width: 55%;
+                }
+
+                .modal-content {
+                    width: 35%;
+                }
             }
 
-            .modal-content {
-                width: 30%;
+            @media only screen and (min-width: 1000px) {
+                body {
+                    margin: 30px;
+                }
+
+                .actions {
+                    width: 35%;
+                }
+
+                .modal-content {
+                    width: 30%;
+                }
+
+                .masthead-intro {
+                    max-width: 60%;
+                }
             }
 
-            .masthead-intro {
-                max-width: 60%;
-            }
-        }
+            @media only screen and (min-width: 1300px) {
+                .modal-content {
+                    width: 22%;
+                }
 
-        @media only screen and (min-width: 1300px) {
-            .modal-content {
-                width: 22%;
-            }
-        }
+                .masthead {
+                    padding: 18em 0;
+                }
